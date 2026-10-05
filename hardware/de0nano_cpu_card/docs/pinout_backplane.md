@@ -38,6 +38,7 @@ Note:  This is NOT an A-C or A-B-C connector, just 1 to 31 !
 |  31 | GND         |        in               |   GND powersupply         |       |
 
 *1: needs 10k pullup to +5V
+
 *2: needs 10k pullup to +5V and 100pF to GND
 
 All signals are CDP1802 signals except pin 1,2 and 31
