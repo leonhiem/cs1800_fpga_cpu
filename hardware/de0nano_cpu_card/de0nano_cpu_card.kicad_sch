@@ -1,0 +1,282 @@
+(kicad_sch
+	(version 20260306)
+	(generator "eeschema")
+	(generator_version "10.0")
+	(uuid "0daab69e-2257-45dd-abd7-efbe947cce3e")
+	(paper "A3")
+	(title_block
+		(title "CS1800 DE0-Nano CPU Card - Top Level")
+		(date "2026-09-28")
+		(rev "A")
+		(company "CS1800 Project")
+		(comment 1 "RCA1802 (CDP1802) VHDL core on Terasic DE0-Nano; CS1800 Eurocard backplane CPU-board replacement")
+		(comment 2 "Double Eurocard, DIN41617 31p male backplane connector, 5V backplane power")
+	)
+	(lib_symbols)
+	(sheet
+		(at 220 100)
+		(size 70 30)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(stroke
+			(width 0.1524)
+			(type solid)
+		)
+		(fill
+			(color 0 0 0 0)
+		)
+		(uuid "06cb3957-3e2a-42f7-9aab-bec97b55ee82")
+		(property "Sheetname" "RS232 Transceiver (MAX3232) + DB9"
+			(at 220 99.2 0)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left bottom)
+			)
+		)
+		(property "Sheetfile" "sheets/rs232.kicad_sch"
+			(at 220 131.2 0)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left top)
+			)
+		)
+	)
+	(sheet
+		(at 20 30)
+		(size 70 30)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(stroke
+			(width 0.1524)
+			(type solid)
+		)
+		(fill
+			(color 0 0 0 0)
+		)
+		(uuid "4f6bbb95-6697-43c0-83d6-5afb3916ffb4")
+		(property "Sheetname" "Backplane Connector (DIN41617, 31p male)"
+			(at 20 29.2 0)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left bottom)
+			)
+		)
+		(property "Sheetfile" "sheets/backplane_connector.kicad_sch"
+			(at 20 61.2 0)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left top)
+			)
+		)
+	)
+	(sheet
+		(at 20 170)
+		(size 70 30)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(stroke
+			(width 0.1524)
+			(type solid)
+		)
+		(fill
+			(color 0 0 0 0)
+		)
+		(uuid "5bdfddb1-6b11-40ff-a5b3-24c3d0c519a0")
+		(property "Sheetname" "Front Panel I/O"
+			(at 20 169.2 0)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left bottom)
+			)
+		)
+		(property "Sheetfile" "sheets/frontpanel_io.kicad_sch"
+			(at 20 201.2 0)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left top)
+			)
+		)
+	)
+	(sheet
+		(at 120 100)
+		(size 70 30)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(stroke
+			(width 0.1524)
+			(type solid)
+		)
+		(fill
+			(color 0 0 0 0)
+		)
+		(uuid "869c89e1-96aa-439b-bac8-8b2b26d1ef4c")
+		(property "Sheetname" "USB-Serial Bridge (FT2232H)"
+			(at 120 99.2 0)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left bottom)
+			)
+		)
+		(property "Sheetfile" "sheets/usb_serial_bridge.kicad_sch"
+			(at 120 131.2 0)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left top)
+			)
+		)
+	)
+	(sheet
+		(at 20 100)
+		(size 70 30)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(stroke
+			(width 0.1524)
+			(type solid)
+		)
+		(fill
+			(color 0 0 0 0)
+		)
+		(uuid "8b002943-6b27-46a8-b3d0-f29a8b6e36ed")
+		(property "Sheetname" "Power (5V in, DE0-Nano feed, rails)"
+			(at 20 99.2 0)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left bottom)
+			)
+		)
+		(property "Sheetfile" "sheets/power.kicad_sch"
+			(at 20 131.2 0)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left top)
+			)
+		)
+	)
+	(sheet
+		(at 220 30)
+		(size 70 30)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(stroke
+			(width 0.1524)
+			(type solid)
+		)
+		(fill
+			(color 0 0 0 0)
+		)
+		(uuid "a56ed679-b35c-49f9-890d-ca9b02a60560")
+		(property "Sheetname" "DE0-Nano GPIO Header / Ribbon I-F"
+			(at 220 29.2 0)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left bottom)
+			)
+		)
+		(property "Sheetfile" "sheets/fpga_header.kicad_sch"
+			(at 220 61.2 0)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left top)
+			)
+		)
+	)
+	(sheet
+		(at 120 30)
+		(size 70 30)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(stroke
+			(width 0.1524)
+			(type solid)
+		)
+		(fill
+			(color 0 0 0 0)
+		)
+		(uuid "ea088182-5545-46f8-8812-e28a2cf9659a")
+		(property "Sheetname" "Level Shifters (4x SN74LVC8T245)"
+			(at 120 29.2 0)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left bottom)
+			)
+		)
+		(property "Sheetfile" "sheets/level_shifters.kicad_sch"
+			(at 120 61.2 0)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left top)
+			)
+		)
+	)
+)

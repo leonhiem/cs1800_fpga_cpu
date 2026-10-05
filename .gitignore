@@ -1,0 +1,23 @@
+# Editor artifacts (vim undo/swap files, exit-message notes)
+*.un~
+*.swp
+*.swo
+exitmsg
+
+# KiCad backups / autosave / locks
+*.bak
+*-bak
+_autosave-*
+*.kicad_sch-bak
+*.kicad_pcb-bak
+fp-info-cache
+*.lck
+*~
+
+# KiCad local/project-cache files that are machine-specific
+**/*-backups/
+*.kicad_prl
+
+# JLCPCB export working files (generated, not source)
+jlcpcb/*.zip
+jlcpcb/gerbers/

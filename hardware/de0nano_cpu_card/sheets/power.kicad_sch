@@ -1,0 +1,14 @@
+(kicad_sch
+	(version 20260306)
+	(generator "eeschema")
+	(generator_version "10.0")
+	(uuid "a8fdfcc0-d222-4db1-8470-ccce460f65df")
+	(paper "A4")
+	(title_block
+		(title "Power (5V in, DE0-Nano feed, rails)")
+		(date "2026-09-28")
+		(rev "A")
+		(company "CS1800 Project")
+	)
+	(lib_symbols)
+)

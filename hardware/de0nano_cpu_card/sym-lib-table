@@ -1,0 +1,3 @@
+(sym_lib_table
+  (lib (name "cs1800")(type "KiCad")(uri "${KIPRJMOD}/libraries/symbols/cs1800.kicad_sym")(options "")(descr "CS1800 project-specific symbols (DIN41617 backplane connector, DE0-Nano header, etc.)"))
+)

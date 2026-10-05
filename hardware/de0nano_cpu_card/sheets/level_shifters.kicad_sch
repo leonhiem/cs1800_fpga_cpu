@@ -1,0 +1,14 @@
+(kicad_sch
+	(version 20260306)
+	(generator "eeschema")
+	(generator_version "10.0")
+	(uuid "ffc3a3ce-3b52-4296-80f0-cadfaa55d4c2")
+	(paper "A4")
+	(title_block
+		(title "Level Shifters (4x SN74LVC8T245)")
+		(date "2026-09-28")
+		(rev "A")
+		(company "CS1800 Project")
+	)
+	(lib_symbols)
+)

@@ -1,0 +1,14 @@
+(kicad_sch
+	(version 20260306)
+	(generator "eeschema")
+	(generator_version "10.0")
+	(uuid "d08e62d0-b871-4110-b5a0-f8a1b6e221c7")
+	(paper "A4")
+	(title_block
+		(title "RS232 Transceiver (MAX3232) + DB9")
+		(date "2026-09-28")
+		(rev "A")
+		(company "CS1800 Project")
+	)
+	(lib_symbols)
+)

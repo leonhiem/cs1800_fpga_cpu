@@ -1,0 +1,14 @@
+(kicad_sch
+	(version 20260306)
+	(generator "eeschema")
+	(generator_version "10.0")
+	(uuid "e5229d1e-077e-4133-9b91-56683af9db54")
+	(paper "A4")
+	(title_block
+		(title "Front Panel I/O")
+		(date "2026-09-28")
+		(rev "A")
+		(company "CS1800 Project")
+	)
+	(lib_symbols)
+)
