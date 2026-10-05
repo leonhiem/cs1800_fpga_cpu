@@ -10,6 +10,7 @@ Still open, whenever you're ready (no rush, not blocking further scaffolding):
 (1), (4)
 Eurocard dimensions: depth=160mm width=100mm
 
+```
                                   top
            +-------------------- 160mm --------------------+
            |          +--+           +--------+            |
@@ -26,6 +27,7 @@ frontpanel | led3     |  |           |  nano  |  H     L   | backpanel
        |       
        +---------> the frontpanel also holds rockerswitches, 
                    pushbuttons, USB-C. As panelmount
+```
 
 
 Notes on ASCII drawing:
