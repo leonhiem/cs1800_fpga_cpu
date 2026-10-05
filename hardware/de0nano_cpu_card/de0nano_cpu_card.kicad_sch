@@ -142,7 +142,7 @@
 			(color 0 0 0 0)
 		)
 		(uuid "869c89e1-96aa-439b-bac8-8b2b26d1ef4c")
-		(property "Sheetname" "USB-Serial Bridge (FT2232H)"
+		(property "Sheetname" "UART Bridge (Raspberry Pi Pico-W)"
 			(at 120 99.2 0)
 			(show_name no)
 			(do_not_autoplace no)
@@ -153,7 +153,7 @@
 				(justify left bottom)
 			)
 		)
-		(property "Sheetfile" "sheets/usb_serial_bridge.kicad_sch"
+		(property "Sheetfile" "sheets/pico_w_bridge.kicad_sch"
 			(at 120 131.2 0)
 			(show_name no)
 			(do_not_autoplace no)

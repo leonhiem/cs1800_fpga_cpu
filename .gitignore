@@ -21,3 +21,5 @@ fp-info-cache
 # JLCPCB export working files (generated, not source)
 jlcpcb/*.zip
 jlcpcb/gerbers/
+*-erc.rpt
+*-drc.rpt
