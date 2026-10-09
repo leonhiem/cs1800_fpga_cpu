@@ -1079,7 +1079,7 @@
 		(in_pos_files yes)
 		(dnp no)
 		(uuid "55a715f0-61ec-4424-ad84-f6a15602f047")
-		(property "Reference" "C1"
+		(property "Reference" "C14"
 			(at 69.85 33.37 0)
 			(show_name no)
 			(do_not_autoplace no)
@@ -1139,7 +1139,7 @@
 		(instances
 			(project "de0nano_cpu_card"
 				(path "/0daab69e-2257-45dd-abd7-efbe947cce3e/8b002943-6b27-46a8-b3d0-f29a8b6e36ed"
-					(reference "C1")
+					(reference "C14")
 					(unit 1)
 				)
 			)

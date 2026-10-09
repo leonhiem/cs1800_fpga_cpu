@@ -98,3 +98,30 @@ of `share/kicad/symbols/<Library>.kicad_symdir/`) and add a `load(...)` call.
   kicad-cli's ERC, even though it's electrically fine. Wire `PWR_FLAG`s via a
   plain net label (the rail's name, e.g. `net="+3V3"`) instead of the
   power-symbol-stamp mechanism to avoid it.
+- **Each `build_*.py` numbers its own references starting from 1/2/3,
+  independently of every other sheet** — `kicad-cli sch erc` does NOT catch
+  the resulting cross-sheet collisions (ERC resolves connectivity by net
+  name, not by reference, so e.g. two different "R1"s on two different
+  sheets looks fine to ERC). This went unnoticed until PCB work started,
+  when `kicad-cli sch export netlist` warned "schematic has annotation
+  errors" and the netlist's `(components)` section showed ~19 reference
+  names each mapping to 2-4 *different* real parts across sheets (fixed in
+  `patch_reannotate_global.py`, 2026-10-09). **Before any new `build_*.py`
+  run or hand-added component**, check `kicad-cli10 sch export netlist
+  --output /tmp/x.net ../de0nano_cpu_card.kicad_sch` and grep its
+  `(components)` section for duplicate `(ref ...)` values — don't rely on
+  `sch erc` alone to catch this.
+- Each component's reference is stored in **two** places in a `.kicad_sch`
+  file: the visible `(property "Reference" "X" ...)` field, AND a
+  `(reference "X")` inside its `(instances (project ... (path ... (reference
+  "X") (unit N))))` block. `kicad-cli sch export netlist` reads from the
+  *second* one — renaming only the property field (the obvious one) leaves
+  the netlist unchanged. Any ref-renaming patch must update both.
+- `kicad-cli sch export netlist` prints "Warning: schematic has annotation
+  errors, please use the schematic editor to fix them" to stderr even after
+  the above fix was verified complete (netlist's `(components)` section has
+  zero duplicate refs, `sch erc`'s dedicated `duplicate_reference`/
+  `unannotated` checks, both "error" severity, find nothing). Seems to be a
+  stale/overly-cautious message from the netlist exporter rather than a real
+  remaining problem — don't take it at face value, check the actual
+  `(components)` section instead.

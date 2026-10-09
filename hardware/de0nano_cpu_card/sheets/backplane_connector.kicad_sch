@@ -3399,7 +3399,7 @@
 		(in_pos_files yes)
 		(dnp no)
 		(uuid "20149d48-39e0-4bac-a986-2366f0f1935b")
-		(property "Reference" "R12"
+		(property "Reference" "R5"
 			(at 208.28 171.8 0)
 			(show_name no)
 			(do_not_autoplace no)
@@ -3459,7 +3459,7 @@
 		(instances
 			(project "de0nano_cpu_card"
 				(path "/0daab69e-2257-45dd-abd7-efbe947cce3e/4f6bbb95-6697-43c0-83d6-5afb3916ffb4"
-					(reference "R12")
+					(reference "R5")
 					(unit 1)
 				)
 			)
@@ -3476,7 +3476,7 @@
 		(in_pos_files yes)
 		(dnp no)
 		(uuid "30979a73-d138-4d78-8d00-ea744addd486")
-		(property "Reference" "R14"
+		(property "Reference" "R6"
 			(at 208.28 187.04 0)
 			(show_name no)
 			(do_not_autoplace no)
@@ -3536,7 +3536,7 @@
 		(instances
 			(project "de0nano_cpu_card"
 				(path "/0daab69e-2257-45dd-abd7-efbe947cce3e/4f6bbb95-6697-43c0-83d6-5afb3916ffb4"
-					(reference "R14")
+					(reference "R6")
 					(unit 1)
 				)
 			)
@@ -3553,7 +3553,7 @@
 		(in_pos_files yes)
 		(dnp no)
 		(uuid "337a15ff-49bb-4a6e-b961-6e798876e9b0")
-		(property "Reference" "C3"
+		(property "Reference" "C1"
 			(at 228.6 126.08 0)
 			(show_name no)
 			(do_not_autoplace no)
@@ -3613,7 +3613,7 @@
 		(instances
 			(project "de0nano_cpu_card"
 				(path "/0daab69e-2257-45dd-abd7-efbe947cce3e/4f6bbb95-6697-43c0-83d6-5afb3916ffb4"
-					(reference "C3")
+					(reference "C1")
 					(unit 1)
 				)
 			)
@@ -3704,7 +3704,7 @@
 		(in_pos_files yes)
 		(dnp no)
 		(uuid "4089aa52-00bc-43ea-80d1-fdcdf691e46e")
-		(property "Reference" "R8"
+		(property "Reference" "R3"
 			(at 208.28 141.32 0)
 			(show_name no)
 			(do_not_autoplace no)
@@ -3764,7 +3764,7 @@
 		(instances
 			(project "de0nano_cpu_card"
 				(path "/0daab69e-2257-45dd-abd7-efbe947cce3e/4f6bbb95-6697-43c0-83d6-5afb3916ffb4"
-					(reference "R8")
+					(reference "R3")
 					(unit 1)
 				)
 			)
@@ -4093,7 +4093,7 @@
 		(in_pos_files yes)
 		(dnp no)
 		(uuid "5f83d88f-837c-44df-b737-894e99d34af5")
-		(property "Reference" "R10"
+		(property "Reference" "R4"
 			(at 208.28 156.56 0)
 			(show_name no)
 			(do_not_autoplace no)
@@ -4153,7 +4153,7 @@
 		(instances
 			(project "de0nano_cpu_card"
 				(path "/0daab69e-2257-45dd-abd7-efbe947cce3e/4f6bbb95-6697-43c0-83d6-5afb3916ffb4"
-					(reference "R10")
+					(reference "R4")
 					(unit 1)
 				)
 			)
@@ -4392,7 +4392,7 @@
 		(in_pos_files yes)
 		(dnp no)
 		(uuid "7ca4ee53-fd7f-41d3-82c7-02e98fb8709d")
-		(property "Reference" "R28"
+		(property "Reference" "R13"
 			(at 208.28 291.18 0)
 			(show_name no)
 			(do_not_autoplace no)
@@ -4452,7 +4452,7 @@
 		(instances
 			(project "de0nano_cpu_card"
 				(path "/0daab69e-2257-45dd-abd7-efbe947cce3e/4f6bbb95-6697-43c0-83d6-5afb3916ffb4"
-					(reference "R28")
+					(reference "R13")
 					(unit 1)
 				)
 			)
@@ -4469,7 +4469,7 @@
 		(in_pos_files yes)
 		(dnp no)
 		(uuid "7f5f33f0-ec7c-4486-9792-5f81d29aff2d")
-		(property "Reference" "R24"
+		(property "Reference" "R11"
 			(at 208.28 261.97 0)
 			(show_name no)
 			(do_not_autoplace no)
@@ -4529,7 +4529,7 @@
 		(instances
 			(project "de0nano_cpu_card"
 				(path "/0daab69e-2257-45dd-abd7-efbe947cce3e/4f6bbb95-6697-43c0-83d6-5afb3916ffb4"
-					(reference "R24")
+					(reference "R11")
 					(unit 1)
 				)
 			)
@@ -4546,7 +4546,7 @@
 		(in_pos_files yes)
 		(dnp no)
 		(uuid "7f7242f1-8ce9-4712-a7bc-da6015bcec0d")
-		(property "Reference" "R3"
+		(property "Reference" "R2"
 			(at 208.28 112.11 0)
 			(show_name no)
 			(do_not_autoplace no)
@@ -4606,7 +4606,7 @@
 		(instances
 			(project "de0nano_cpu_card"
 				(path "/0daab69e-2257-45dd-abd7-efbe947cce3e/4f6bbb95-6697-43c0-83d6-5afb3916ffb4"
-					(reference "R3")
+					(reference "R2")
 					(unit 1)
 				)
 			)
@@ -4623,7 +4623,7 @@
 		(in_pos_files yes)
 		(dnp no)
 		(uuid "8b1dae3d-4233-4bc9-bfe0-fcd337cfe7ef")
-		(property "Reference" "R26"
+		(property "Reference" "R12"
 			(at 208.28 275.94 0)
 			(show_name no)
 			(do_not_autoplace no)
@@ -4683,7 +4683,7 @@
 		(instances
 			(project "de0nano_cpu_card"
 				(path "/0daab69e-2257-45dd-abd7-efbe947cce3e/4f6bbb95-6697-43c0-83d6-5afb3916ffb4"
-					(reference "R26")
+					(reference "R12")
 					(unit 1)
 				)
 			)
@@ -4700,7 +4700,7 @@
 		(in_pos_files yes)
 		(dnp no)
 		(uuid "8c33d666-530c-42e8-ac44-8b6d0bb64c17")
-		(property "Reference" "R16"
+		(property "Reference" "R7"
 			(at 208.28 201.01 0)
 			(show_name no)
 			(do_not_autoplace no)
@@ -4760,7 +4760,7 @@
 		(instances
 			(project "de0nano_cpu_card"
 				(path "/0daab69e-2257-45dd-abd7-efbe947cce3e/4f6bbb95-6697-43c0-83d6-5afb3916ffb4"
-					(reference "R16")
+					(reference "R7")
 					(unit 1)
 				)
 			)
@@ -4777,7 +4777,7 @@
 		(in_pos_files yes)
 		(dnp no)
 		(uuid "973109f7-2470-4701-bf26-96fd0832c577")
-		(property "Reference" "R18"
+		(property "Reference" "R8"
 			(at 208.28 216.25 0)
 			(show_name no)
 			(do_not_autoplace no)
@@ -4837,7 +4837,7 @@
 		(instances
 			(project "de0nano_cpu_card"
 				(path "/0daab69e-2257-45dd-abd7-efbe947cce3e/4f6bbb95-6697-43c0-83d6-5afb3916ffb4"
-					(reference "R18")
+					(reference "R8")
 					(unit 1)
 				)
 			)
@@ -5372,7 +5372,7 @@
 		(in_pos_files yes)
 		(dnp no)
 		(uuid "cacd8b86-2960-4673-bd36-d8e4beeb215a")
-		(property "Reference" "R20"
+		(property "Reference" "R9"
 			(at 208.28 231.49 0)
 			(show_name no)
 			(do_not_autoplace no)
@@ -5432,7 +5432,7 @@
 		(instances
 			(project "de0nano_cpu_card"
 				(path "/0daab69e-2257-45dd-abd7-efbe947cce3e/4f6bbb95-6697-43c0-83d6-5afb3916ffb4"
-					(reference "R20")
+					(reference "R9")
 					(unit 1)
 				)
 			)
@@ -5449,7 +5449,7 @@
 		(in_pos_files yes)
 		(dnp no)
 		(uuid "d94f88b9-a212-4d7e-89f3-c6547bbd1b56")
-		(property "Reference" "R22"
+		(property "Reference" "R10"
 			(at 208.28 246.73 0)
 			(show_name no)
 			(do_not_autoplace no)
@@ -5509,7 +5509,7 @@
 		(instances
 			(project "de0nano_cpu_card"
 				(path "/0daab69e-2257-45dd-abd7-efbe947cce3e/4f6bbb95-6697-43c0-83d6-5afb3916ffb4"
-					(reference "R22")
+					(reference "R10")
 					(unit 1)
 				)
 			)
@@ -5600,7 +5600,7 @@
 		(in_pos_files yes)
 		(dnp no)
 		(uuid "f59b9fe8-9ac0-4c34-bec8-ef5f22236c23")
-		(property "Reference" "R2"
+		(property "Reference" "R1"
 			(at 208.28 96.87 0)
 			(show_name no)
 			(do_not_autoplace no)
@@ -5660,7 +5660,7 @@
 		(instances
 			(project "de0nano_cpu_card"
 				(path "/0daab69e-2257-45dd-abd7-efbe947cce3e/4f6bbb95-6697-43c0-83d6-5afb3916ffb4"
-					(reference "R2")
+					(reference "R1")
 					(unit 1)
 				)
 			)
