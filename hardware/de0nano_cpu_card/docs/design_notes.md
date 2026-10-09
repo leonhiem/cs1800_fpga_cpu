@@ -340,6 +340,32 @@ coordinate mapping non-obvious — see the comments in
 `pcb drc` after the fix: still 0 electrical shorts, 309 unrouted
 (unchanged), cosmetic warnings now 73 (down from 77).
 
+**2026-10-09 (later still): J1 mounting holes + body near-edge corrected.**
+The user read 3 more real dimensions off the datasheet's PCB-hole-pattern
+drawing: each mounting hole is 2.5mm from its nearest end pin (pin 1 /
+pin 31) in the same direction that already makes the odd-pin row the
+"close to board edge" row (not inward); the two mounting holes are 85mm
+apart center-to-center (matches the datasheet's own 31-position "D"
+dimension exactly: span(75) + 2x5mm outboard inset = 85 -- a useful
+cross-check that the existing along-row hole placement was already
+right, only the perpendicular/depth offset was missing); and the plastic
+body's near edge (where the solder pins enter the housing) is a further
+4.3mm out from the mounting hole, same direction. Fixed in
+`tools/gen_din41617_fp.py` (`MOUNT_Y_OFFSET`, `PLASTIC_EDGE_OFFSET`). The
+body's far edge / overall depth is still an unverified placeholder (no
+datasheet dimension for it yet) -- only the near edge moved to a real
+value. `pcb drc`: still 0 shorts, 309 unrouted, 72 cosmetic warnings.
+
+Side effect worth flagging: with the mounting holes now correctly offset
+further toward the board edge than the pads, and J1's current rough
+X-placement (154mm, see `build_pcb.py`) already putting the nearest pads
+right at the edge (the pre-existing nit above), the mounting holes now
+visibly overhang past the board edge in a render. This isn't a new
+footprint-geometry bug -- it's the existing "J1's X placement needs a
+small inward nudge" issue becoming more visible now that there's a real
+mounting hole sitting further out than the pads were. Left for the same
+placement pass as the pad-edge nit, not fixed here.
+
 The DE0-Nano reference footprint (`cs1800:DE0Nano_Reference_Outline`) is
 mechanical-only (NPTH mounting holes, no copper pads), so it can't
 electrically short against anything and wasn't given its own reserved
