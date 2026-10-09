@@ -2,6 +2,8 @@
 
 Note:  This is NOT an A-C or A-B-C connector, just 1 to 31 !
 
+See also: backplane_notes.md
+
 
 | Pin | Signal name | Direction (card's view) | Domain (5V / GND / other) | Notes | CDP1802
 |-----|-------------|-------------------------|---------------------------|-------|--------
