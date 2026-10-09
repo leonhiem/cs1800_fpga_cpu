@@ -7,21 +7,19 @@ is the synthesis of them, kept in sync as they change.*
 
 ## Status (2026-10-09)
 
-**Architecture and mechanical/sourcing are fully resolved, and all 7
-schematic sheets are now wired for real** (generated via the scripts in
-`tools/`, see `tools/README.md`). Whole-hierarchy `kicad-cli sch erc` passes
-with **0 errors**, 3 known/benign warnings:
-- `footprint_link_issues` on the DIN41617 connector — its custom footprint
-  hasn't been drawn yet (see §1/§7, Next steps #1).
-- `lib_symbol_mismatch` x2 (`RaspberryPi_Pico_W`, `MAX3232`) — cosmetic only:
-  kicad-cli compares the generator's flattened symbol cache against the live
-  library and sees a structural (not electrical) difference. Opening the
-  project in the real GUI will likely offer "update symbol from library",
-  safe to accept.
+**Architecture and mechanical/sourcing are fully resolved, all 7 schematic
+sheets are wired for real** (generated via the scripts in `tools/`, see
+`tools/README.md`), **and the custom DIN41617 footprint now exists**
+(`libraries/footprints/cs1800.pretty/DIN41617_31P_Male_Angled.kicad_mod`).
+Whole-hierarchy `kicad-cli sch erc` passes with **0 errors**, 2 known/benign
+cosmetic warnings (`lib_symbol_mismatch` on `RaspberryPi_Pico_W` and
+`MAX3232` — kicad-cli compares the generator's flattened symbol cache
+against the live library and sees a structural, not electrical, difference;
+the GUI will likely offer "update symbol from library", safe to accept).
 
-`kicad-cli pcb drc` on the still-placeholder PCB outline: 0 violations.
-What remains is PCB-side work: the custom DIN41617 footprint, redrawing the
-board outline to the real floorplan, placement, and routing.
+`kicad-cli pcb drc` on the still-placeholder PCB outline: 0 violations. What
+remains is PCB-side work: any other missing footprints, redrawing the board
+outline to the real floorplan, placement, and routing.
 
 ## Purpose
 
@@ -75,13 +73,23 @@ no DMA lines, no CLEAR/WAIT, and no CLOCK.
 **Physical part identified**: Conec/Amphenol DIN41617 male angled, 31-pos,
 2.50mm pitch, quality-class-3 hard-silver-plated contacts — **Amphenol
 101-A-10119-X** (Mouser-stocked). Datasheet: `docs/conec_connectors_din_41617-3009425.pdf`.
-Key mechanical dims for the KiCad footprint (not in any stock KiCad
-library — needs a custom footprint):
-- contact pitch 2.50mm, 30 spaces pin-to-pin (pins 1→31) = 75.00mm span
+
+**Custom footprint built** (not in any stock KiCad library): `cs1800:DIN41617_31P_Male_Angled`
+in `libraries/footprints/cs1800.pretty/`, built by
+`tools/gen_din41617_fp.py` from the datasheet's dimensioned PCB-hole-pattern
+drawing:
+- contact pitch 2.50mm, 30 spaces pin-to-pin (pins 1→31) = 75.00mm span,
+  pin1 at the footprint's local origin
 - mounting-hole-to-mounting-hole spacing: 85.00mm, holes sit 5.00mm outboard
-  of pin 1 / pin 31 on the same axis
+  of pin 1 / pin 31 on the same axis (NPTH, 2.8mm drill)
+- signal pads: 1.1mm drill, 2.0mm pad, pin1 marked with a square/roundrect pad
 - overall body length: 90.6mm (right-angle/male, the variant we're using)
-- PCB pad hole diameter: 1.0-1.1mm (pins ~0.8mm)
+- **the body/silkscreen/courtyard outline is an unverified approximation**
+  (only the overall 90.6mm length is from the datasheet; depth is a
+  placeholder) — the electrical pad/mounting-hole positions are
+  datasheet-precise, but check the outline against the physical part (or a
+  3D model, if Amphenol publishes one) before finalizing silkscreen/courtyard
+  clearances.
 
 ## 2. Level shifter allocation — 6x SN74LVC8T245, not 4
 
@@ -298,7 +306,7 @@ impossible in FPGA fabric, pin-boundary tri-states are normal.
 | RS232 transceiver | **MAX3232EIDR**, SOIC-16 | SOIC-16 | 1 | chosen over MAX3232IPW (TSSOP-16) for easier hand-handling; 4x 0.1uF ceramic |
 | RS232 connector | DB9 (DE-9), 90°, PCB-mount | THT | 1 | pin2=RXD, pin3=TXD, pin5=GND |
 | USB connector | — none — | — | 0 | Pico-W's own micro-USB used via cable |
-| Backplane connector | **Amphenol 101-A-10119-X** (DIN41617, 31p, male, angled, 2.5mm pitch) | THT | 1 | manual placement at JLCPCB (extra cost/lead time); custom KiCad footprint needed |
+| Backplane connector | **Amphenol 101-A-10119-X** (DIN41617, 31p, male, angled, 2.5mm pitch) | THT | 1 | manual placement at JLCPCB (extra cost/lead time); custom KiCad footprint built (`cs1800:DIN41617_31P_Male_Angled`) |
 | Pushbuttons (panel) x3 | Generic panel-mount tactile switch | panel-mount + 2-pin header | 3 | "step", "reset", "qef4" |
 | Rocker switches (panel) x3 | Generic panel-mount SPDT/SPST rocker | panel-mount + 2-pin header | 3 | "run/halt", "dog off", "LC off" |
 | LEDs x4 | 3mm LED, THT | THT, 90°, soldered to PCB | 4 | green/yellow/red/red, 220Ω series resistor each |
@@ -337,8 +345,12 @@ open decisions:
    from §1-§6 are in, `sch erc` is clean (0 errors). See `tools/README.md`
    for how they were generated and how to regenerate a sheet after a pinout
    change.
-2. Build the custom DIN41617 footprint (dims in §1) and any other missing
-   footprints, into `libraries/footprints/cs1800.pretty/`.
+2. ~~Build the custom DIN41617 footprint~~ **DONE (2026-10-09)** — see §1.
+   Build any other missing footprints into `libraries/footprints/cs1800.pretty/`
+   (the DE0-Nano mounting-hole pattern, and check whether the Pico-W module
+   footprint `Module:RaspberryPi_Pico_W_SMD_HandSolder` referenced in
+   `pico_w_bridge.kicad_sch` suits a through-header-mounted module or needs
+   a different one — see §4).
 3. Redraw the PCB outline to the real 100x160mm floorplan from
    `Eurocard.md`: place the DE0-Nano mounting holes at the coordinates in
    §7, lay out the two 40-pin headers, the DIN41617 connector, the 6 level
