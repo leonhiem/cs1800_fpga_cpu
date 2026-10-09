@@ -17,11 +17,14 @@ MOUNT_Y_OFFSET = 2.5   # mounting hole is 2.5mm from pin1/pin31 in +y (the
                         # the board edge / the connector's mating face, not
                         # further inboard). Per the user's direct read of
                         # the datasheet's PCB-hole-pattern drawing, 2026-10-09.
-PLASTIC_EDGE_OFFSET = 4.3   # from the mounting hole to the near edge of the
-                             # plastic body (where the solder pins enter the
-                             # housing), same +y direction as MOUNT_Y_OFFSET.
-                             # Also from the user's datasheet read, 2026-10-09
-                             # -- this replaces the old guessed body_y0.
+PLASTIC_EDGE_OFFSET = 4.3   # from the mounting hole to the FAR edge of the
+                             # plastic body (same +y direction as
+                             # MOUNT_Y_OFFSET, i.e. further out toward the
+                             # board edge / mating face than the mounting
+                             # hole) -- NOT the near edge. The pads and
+                             # mounting holes must end up INSIDE the body
+                             # rectangle, not beyond it. Corrected 2026-10-09
+                             # after first getting this backwards.
 
 # Local frame: pin 1 at the HIGH-x end, decreasing to pin 31 at x=0. This is
 # reversed from a naive "pin1 at x=0" layout on purpose -- J1 is placed
@@ -35,18 +38,19 @@ mount_left = -MOUNT_INSET
 mount_right = span + MOUNT_INSET
 mount_y = ZIGZAG + MOUNT_Y_OFFSET   # 5.04
 
-# Body outline: overall length 90.6mm (datasheet "A" dim) and the near edge
-# (where pins enter the plastic) are now real datasheet dimensions; the far
-# edge / total depth is still a placeholder -- NOT verified against the
-# physical part, see docs/design_notes.md.
+# Body outline: overall length 90.6mm (datasheet "A" dim) and the FAR edge
+# (body_y1, beyond the mounting holes/pads, toward the board edge / mating
+# face) are now real datasheet dimensions. The NEAR edge (body_y0, the
+# small margin behind the pad row) is still a placeholder -- NOT verified
+# against the physical part, see docs/design_notes.md. Pads (y 0..ZIGZAG)
+# and mounting holes (y mount_y) must land strictly inside [body_y0, body_y1].
 body_len = 90.6
 body_overhang = (body_len - (mount_right - mount_left)) / 2
 body_x0 = mount_left - body_overhang
 body_x1 = mount_right + body_overhang
-body_y0 = mount_y + PLASTIC_EDGE_OFFSET   # 9.34, real dimension
-body_depth_guess = 10.5                   # old y0..y1 span, kept as a
-                                           # still-unverified placeholder
-body_y1 = body_y0 + body_depth_guess
+body_y1 = mount_y + PLASTIC_EDGE_OFFSET   # 9.34, real dimension
+body_near_margin_guess = 1.5              # unverified placeholder
+body_y0 = -body_near_margin_guess
 
 out = []
 out.append(f'''(footprint "DIN41617_31P_Male_Angled"

@@ -366,6 +366,19 @@ small inward nudge" issue becoming more visible now that there's a real
 mounting hole sitting further out than the pads were. Left for the same
 placement pass as the pad-edge nit, not fixed here.
 
+**2026-10-09 (later still, correction): body rectangle had the near/far
+edges backwards.** The first pass put `PLASTIC_EDGE_OFFSET` (4.3mm) on
+`body_y0`, meaning the whole body rectangle sat entirely *beyond* the
+mounting holes and pads -- i.e. the pads/holes were outside the drawn
+outline instead of inside it, which the user caught immediately. Fixed:
+the 4.3mm dimension is the body's FAR edge (`body_y1`, beyond the
+mounting holes, toward the board edge/mating face); the near edge
+(`body_y0`, just behind the pad row) is still an unverified small-margin
+placeholder, now correctly on the *other* end. Verified with another
+`kicad-cli pcb render` crop that the pads and both mounting holes now
+fall strictly inside the outline. `pcb drc`: still 0 shorts, 309
+unrouted, 73 cosmetic warnings.
+
 The DE0-Nano reference footprint (`cs1800:DE0Nano_Reference_Outline`) is
 mechanical-only (NPTH mounting holes, no copper pads), so it can't
 electrically short against anything and wasn't given its own reserved
