@@ -290,9 +290,45 @@ exact switch/LED/connector hole positions are **not** being engineered in
 the PCB/CAD flow; the user will hand-drill those, so this doesn't block PCB
 or schematic work.
 
-**Still placeholder**: `de0nano_cpu_card.kicad_pcb` only has a generic
-100x160mm outline rectangle — it hasn't been redrawn to the real floorplan
-in `Eurocard.md` + the mounting-hole coordinates above yet.
+**PCB now has the real 100x160mm outline, the DE0-Nano mechanical
+reference + its 4 mounting holes, and all 86 real components placed**
+(2026-10-09, `tools/build_pcb.py` + `tools/pcbgen.py`) — see §7a below.
+Rough-placed only; the user is doing final placement + routing.
+
+## 7a. PCB layout status (2026-10-09)
+
+All 86 real footprints (89 schematic components minus the 3 virtual
+`PWR_FLAG`s, which have no physical footprint) are placed on the board via
+`tools/build_pcb.py`, which pulls the netlist straight from the schematic
+(`kicad-cli sch export netlist`) so every pad's net assignment is
+authoritative — no hand-copied connectivity. Grouped roughly per
+Eurocard.md's left-to-right floorplan (front panel / LEDs+switches+RS232+
+Pico-W on the left, future-expansion level shifters, GPIO_1/JP2, the
+DE0-Nano reference, GPIO_0/JP1, backplane-facing level shifters, DIN41617
+on the right), but genuinely **rough**: `pcb drc` on the result shows
+
+- **0 electrical shorts** (`shorting_items`) — the real correctness bar for
+  "is this safe to open and place", and it's clean.
+- **309 unrouted connections** (`unconnected_items`) — expected, nothing
+  has been routed yet.
+- **77 cosmetic/mechanical placement warnings** (silkscreen overlaps,
+  courtyard overlaps, a couple of board-edge/hole clearance nits) — this is
+  the "not finely placed" part; resolving these is exactly the user's
+  placement pass, not something to chase further here. One specific one
+  worth knowing about going in: J1 (the DIN41617 connector, rotated 90°)
+  has one pad slightly over the top board edge — trivial to nudge once
+  placing it for real; hand-computing its exact rotated span wasn't worth
+  the iteration time versus just doing it in the GUI.
+
+The DE0-Nano reference footprint (`cs1800:DE0Nano_Reference_Outline`) is
+mechanical-only (NPTH mounting holes, no copper pads), so it can't
+electrically short against anything and wasn't given its own reserved
+clear zone — it may cosmetically overlap small passives in this rough
+view near the GPIO_0/GPIO_1 headers.
+
+Re-running `tools/build_pcb.py` regenerates the board **from scratch** —
+once the user starts real placement/routing, don't re-run it (same caveat
+as the schematic `build_*.py` scripts).
 
 ## 8. Signal integrity
 
@@ -394,12 +430,13 @@ open decisions:
    ~~Fix the Pico-W footprint~~ **DONE (2026-10-09)** — now uses socket
    headers, see §4. Still need: a footprint/drawing for the DE0-Nano's 4x M3
    mounting holes (coordinates already known, §7).
-3. Redraw the PCB outline to the real 100x160mm floorplan from
-   `Eurocard.md`: place the DE0-Nano mounting holes at the coordinates in
-   §7, lay out the two 40-pin headers, the DIN41617 connector, the 6 level
-   shifters (+ the 2x11 future-expansion header) **with their 12 decoupling
-   caps placed close to each IC's VCCA/VCCB pins (§2)**, the Pico-W header,
-   MAX3232, DB9, and the 2-pin DE0-Nano power feed, then route.
+3. ~~Redraw the PCB outline, place all components~~ **DONE, roughly
+   (2026-10-09)** — see §7a. Real floorplan, DE0-Nano reference + mounting
+   holes, all 86 footprints placed with correct nets (0 electrical shorts).
+   **Still needed**: the user's real placement pass (mechanical fit,
+   ribbon-cable-friendly header positions, the 12 decoupling caps actually
+   close to each IC's VCCA/VCCB pins per §2, front-panel alignment) and all
+   routing — this was explicitly left for the user, not attempted here.
 4. `kicad-cli10 sch export bom` / JLCPCB BOM+CPL export once parts are
    placed; check every part against current JLCPCB/LCSC stock before
    ordering (MAX3232EIDR, the DIN41617 connector as a THT manual-assembly

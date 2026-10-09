@@ -1,9 +1,34 @@
-# Schematic generator tools
+# Generator tools
 
-`kicadgen.py` is a small from-scratch KiCad schematic generator used to build
-this project's 7 schematic sheets programmatically from the pin data in
-`docs/cs1800.qsf`, `docs/pinout_backplane.md`, `docs/Eurocard.md`, etc.,
+`kicadgen.py` is a small from-scratch KiCad **schematic** generator used to
+build this project's 7 schematic sheets programmatically from the pin data
+in `docs/cs1800.qsf`, `docs/pinout_backplane.md`, `docs/Eurocard.md`, etc.,
 instead of hand-placing ~400 pins in the GUI.
+
+`pcbgen.py` + `build_pcb.py` are the **PCB**-side counterpart (2026-10-09):
+kicad-cli has no "update PCB from schematic" command (that's GUI/IPC-only),
+so getting the schematic's ~89 components onto the board at all required
+the same from-scratch approach. `pcbgen.py` parses `kicad-cli sch export
+netlist` output for component→footprint/value and net→(ref,pin)
+connectivity, parses real `.kicad_mod` footprint files (staged in
+`fpstage/`, same idea as `symstage/` for symbols) for their pad sets, and
+places each component's full footprint definition on the board with pads
+wired to the right net — `build_pcb.py` is the per-project placement
+script (declarative X/Y per component, grouped into Eurocard.md's
+functional regions). PCB footprint coordinates are already in the board's
+native Y-down space (unlike schematic symbol libraries), so no Y-flip is
+needed there — simpler than the schematic side. Run it with
+`python3 build_pcb.py` then `kicad-cli10 pcb upgrade
+../de0nano_cpu_card.kicad_pcb` then `pcb drc` to validate, same pattern as
+the schematic tools. **Only rough-places** components (grouped, not
+finely positioned) — see `docs/design_notes.md` §7a for what that means in
+practice and what's left for the user's own placement/routing pass. Same
+"don't just re-run after the user has started their own work" caveat as
+`build_*.py` on the schematic side applies here too.
+
+`gen_de0nano_reference_fp.py` and `gen_din41617_fp.py` build the two
+project-local custom footprints (`libraries/footprints/cs1800.pretty/`) --
+see their own docstrings.
 
 ## Why this exists
 
@@ -125,3 +150,32 @@ of `share/kicad/symbols/<Library>.kicad_symdir/`) and add a `load(...)` call.
   stale/overly-cautious message from the netlist exporter rather than a real
   remaining problem — don't take it at face value, check the actual
   `(components)` section instead.
+
+## PCB-specific quirks (`pcbgen.py` / `build_pcb.py`)
+
+- A hand-written `(net N "NAME")` declared at the board level, and a pad's
+  `(net N "NAME")` entry, both survive `pcb upgrade` — but the output only
+  ever shows `(net "NAME")` on the pad (no number) and drops the top-level
+  per-board `(net N "NAME")` table entirely if nothing else references it
+  by number. This looked broken on first encounter but isn't: `pcb drc`
+  still correctly resolves connectivity by the net *name*, matching same-
+  named pads into one ratsnest-visible net regardless of the missing
+  number. Don't be alarmed by the missing net table / missing pad number —
+  check `pcb drc`'s `[unconnected_items]`/`[shorting_items]` output (which
+  net *names* it reports) to confirm connectivity, not the raw net IDs.
+- Don't assume a stock footprint's natural orientation matches what you
+  want without checking: `IDC-Header_2x20_P2.54mm_Vertical`'s 40 pads are
+  natively narrow-X/tall-Y (pins already run the "long way" along Y) — no
+  rotation needed to stand it up next to the DE0-Nano's edge. First attempt
+  rotated it 90° assuming it needed standing up like the hand-made
+  DIN41617 footprint (which genuinely does need rotating, since *that one*
+  was authored with its pin row along X) — check each footprint's actual
+  pad coordinate spread (`grep` the `.kicad_mod` for `(at ...)` on its
+  pads) before deciding a placement's rotation, rather than assuming.
+- `build_pcb.py`'s component footprint has **no reserved clear X-band** of
+  its own — it's mechanical/NPTH-only (no copper), so it cannot DRC-short
+  against anything and was deliberately left to cosmetically overlap small
+  passives in the rough pass rather than eating ~49mm of the board's 160mm
+  depth that the 6 other functional groups + 2 headers + 2 connectors also
+  need. If this project ever adds a *populated* mechanical reference with
+  real copper, it would need genuine clearance instead.

@@ -1,0 +1,96 @@
+(footprint "DE0Nano_Reference_Outline"
+	(version 20260206)
+	(generator "pcbnew")
+	(generator_version "10.0")
+	(layer "F.Cu")
+	(descr "Mechanical reference only -- DE0-Nano outline + its 4 real M3 mounting holes. No pads: the DE0-Nano connects via 2 ribbon cables to the JP1/JP2 IDC headers, not by soldering to this board. Dims from docs/de0-nano_notes.md (community-sourced, verify against the physical board).")
+	(tags "DE0-Nano mechanical reference keepout")
+	(property "Reference" "DE0NANO"
+		(at 24.5 -3 0)
+		(layer "Dwgs.User")
+		(hide yes)
+		(uuid "d428a466-d7af-4f25-9497-fce4601bd446")
+		(effects
+			(font
+				(size 1.5 1.5)
+				(thickness 0.2)
+			)
+		)
+	)
+	(property "Value" "DE0-Nano (mechanical reference, not populated)"
+		(at 24.5 79 0)
+		(layer "Dwgs.User")
+		(hide yes)
+		(uuid "9cfc1a6f-19ab-4d0b-b226-d3babad44a6c")
+		(effects
+			(font
+				(size 1 1)
+				(thickness 0.15)
+			)
+		)
+	)
+	(property "Datasheet" ""
+		(at 0 0 0)
+		(layer "F.Fab")
+		(hide yes)
+		(uuid "188de2e2-bc7d-41b6-8def-310d2d101faf")
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+		)
+	)
+	(property "Description" ""
+		(at 0 0 0)
+		(layer "F.Fab")
+		(hide yes)
+		(uuid "e4fc4a19-4576-4326-8c5a-9be951ac95cb")
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+		)
+	)
+	(attr exclude_from_pos_files exclude_from_bom)
+	(duplicate_pad_numbers_are_jumpers no)
+	(fp_rect
+		(start 0 0)
+		(end 49 75.2)
+		(stroke
+			(width 0.15)
+			(type dash)
+		)
+		(fill no)
+		(layer "Dwgs.User")
+		(uuid "79248127-cf55-4c1b-90f6-ce113834d945")
+	)
+	(pad "" np_thru_hole circle
+		(at 3.5 3.5)
+		(size 3.2 3.2)
+		(drill 3.2)
+		(layers "*.Cu" "*.Mask")
+		(uuid "3c88f8f4-9942-4c3f-9c12-eb28b4ff02a5")
+	)
+	(pad "" np_thru_hole circle
+		(at 3.5 71.7)
+		(size 3.2 3.2)
+		(drill 3.2)
+		(layers "*.Cu" "*.Mask")
+		(uuid "3f056286-d24d-4817-b0ab-44d9b572731e")
+	)
+	(pad "" np_thru_hole circle
+		(at 45.5 3.5)
+		(size 3.2 3.2)
+		(drill 3.2)
+		(layers "*.Cu" "*.Mask")
+		(uuid "c92e4bcc-4388-4ecd-b8a4-376e6cda095c")
+	)
+	(pad "" np_thru_hole circle
+		(at 45.5 71.7)
+		(size 3.2 3.2)
+		(drill 3.2)
+		(layers "*.Cu" "*.Mask")
+		(uuid "d5aa1f18-4461-4fcc-8b73-d9c890497f5a")
+	)
+	(embedded_fonts no)
+)
