@@ -173,12 +173,22 @@ own VCC_SYS/GND/VCC3P3/GND).
 
 ## 4. Pico-W module
 
-Mounted on headers (not soldered down), oriented antenna-edge up (toward the
-rack's open top, for WiFi performance — needs a copper keepout underneath),
-on-board micro-USB edge down, short cable from that micro-USB to the
-front-panel USB-C connector (no separate USB connector part on this PCB's
-BOM). Runs software that forwards 2 UARTs to USB/terminal and, via WiFi,
-telnet:
+Mounted on headers (not soldered down) — **footprint**:
+`cs1800:RaspberryPi_Pico_W_SocketHeaders_2x1x20_P2.54mm` (built by
+`tools/gen_pico_socket_fp.py`), two 1x20 2.54mm-pitch socket-strip rows,
+17.78mm (0.7") apart — genuine Pico/Pico W spacing, cross-checked against
+KiCad's own `Module:RaspberryPi_Pico_Common_THT` footprint. Socketing
+(rather than direct-soldering the module) is required, not just a nicety:
+the Pico-W needs to sit elevated above this board so its own micro-USB port
+has room for a cable to actually plug in. **When sourcing the socket strips,
+pick a "tall"/stacking-header-height part, not a low-profile one** — the
+footprint only fixes pad positions, not standoff height, so getting enough
+USB-cable clearance is a BOM part choice, not something the footprint
+enforces. Oriented antenna-edge up (toward the rack's open top, for WiFi
+performance — needs a copper keepout underneath), on-board micro-USB edge
+down, short cable from that micro-USB to the front-panel USB-C connector (no
+separate USB connector part on this PCB's BOM). Runs software that forwards
+2 UARTs to USB/terminal and, via WiFi, telnet:
 
 | Pico-W physical pin | function | connects to |
 |---|---|---|
@@ -303,6 +313,7 @@ impossible in FPGA fabric, pin-boundary tri-states are normal.
 |---|---|---|---|---|
 | Level shifter | Texas Instruments SN74LVC8T245PWR | TSSOP-24 | **6** | 4 for backplane bus, 2 for future-expansion header; ~$0.35 ea; 100nF ceramic decoupling on both VCCA and VCCB per chip |
 | UART/USB/WiFi bridge | Raspberry Pi Pico-W module | module-on-headers | 1 | hand-placed, not a JLCPCB SMT part; own on-board micro-USB used directly; needs antenna copper keepout + low-ESR bulk cap on VSYS |
+| Pico-W socket headers | 2x 1x20, 2.54mm pitch, THT, **tall/stacking-height** (not low-profile) | THT | 2 | soldered to this board; Pico-W plugs in — needed for USB-cable clearance, see §4 |
 | RS232 transceiver | **MAX3232EIDR**, SOIC-16 | SOIC-16 | 1 | chosen over MAX3232IPW (TSSOP-16) for easier hand-handling; 4x 0.1uF ceramic |
 | RS232 connector | DB9 (DE-9), 90°, PCB-mount | THT | 1 | pin2=RXD, pin3=TXD, pin5=GND |
 | USB connector | — none — | — | 0 | Pico-W's own micro-USB used via cable |
@@ -346,11 +357,9 @@ open decisions:
    for how they were generated and how to regenerate a sheet after a pinout
    change.
 2. ~~Build the custom DIN41617 footprint~~ **DONE (2026-10-09)** — see §1.
-   Build any other missing footprints into `libraries/footprints/cs1800.pretty/`
-   (the DE0-Nano mounting-hole pattern, and check whether the Pico-W module
-   footprint `Module:RaspberryPi_Pico_W_SMD_HandSolder` referenced in
-   `pico_w_bridge.kicad_sch` suits a through-header-mounted module or needs
-   a different one — see §4).
+   ~~Fix the Pico-W footprint~~ **DONE (2026-10-09)** — now uses socket
+   headers, see §4. Still need: a footprint/drawing for the DE0-Nano's 4x M3
+   mounting holes (coordinates already known, §7).
 3. Redraw the PCB outline to the real 100x160mm floorplan from
    `Eurocard.md`: place the DE0-Nano mounting holes at the coordinates in
    §7, lay out the two 40-pin headers, the DIN41617 connector, the 6 level

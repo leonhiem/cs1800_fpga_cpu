@@ -15,7 +15,10 @@ v5 = load("+5V.kicad_sym", "power")
 pwrflag = load("PWR_FLAG.kicad_sym", "power")
 
 sheet = Sheet("UART Bridge (Raspberry Pi Pico-W)", paper="A3")
-FP_PICO = "Module:RaspberryPi_Pico_W_SMD_HandSolder"
+FP_PICO = "cs1800:RaspberryPi_Pico_W_SocketHeaders_2x1x20_P2.54mm"  # mounted on
+# sockets (removable), not soldered direct -- see tools/gen_pico_socket_fp.py.
+# Needed so the Pico-W's own micro-USB port has clearance for a cable once
+# the module is elevated above this board.
 FP_R = "Resistor_SMD:R_0603_1608Metric"
 FP_C = "Capacitor_SMD:C_0603_1608Metric"
 FP_C_BULK = "Capacitor_SMD:C_1210_3225Metric"
