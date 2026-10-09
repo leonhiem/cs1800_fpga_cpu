@@ -99,6 +99,14 @@ for future expansion (DMA, CLEAR/WAIT, chip-select, extra EF, etc.) that
 is *not* exposed on the backplane — see §4. All 6 are
 `VCCA`=3.3V (DE0-Nano side), `VCCB`=5V (backplane pin 1 / on-board 5V rail).
 
+**Decoupling (2026-10-09, found during GUI schematic review)**: each of the
+6 chips needs a 100nF ceramic cap on *both* supplies — 12 caps total
+(`level_shifters.kicad_sch`, C1-C12). Schematically placed near each IC for
+readability, but the requirement that actually matters is a **PCB-layout**
+one: each cap needs to sit physically close to its IC's VCCA/VCCB pin when
+placing parts — the schematic placement doesn't guarantee that, it's a
+placement-phase TODO (see "Next steps").
+
 ### Backplane-facing 4 chips (29 of 32 channels used)
 
 | device | channels used | `DIR` | signals |
@@ -350,7 +358,8 @@ impossible in FPGA fabric, pin-boundary tri-states are normal.
 | Future-expansion header | 2x11 (or 2x12) pin header | THT | 1 | 11 level-shifted CDP1802 control signals + 11 GND |
 | Pull-up resistors, 10k | — | 0603 | 29 | backplane: D0-D7, LC, nEF1-3, nINT (12); future-expansion header inputs EXP_* (7); spare level-shifter channels U4/U6 (4); front panel switches/buttons (6) |
 | Series resistors, 10Ω | — | 0603 | 4 | `TPA`/`TPB`/`nMRD`/`nMWR`, at the FPGA end (`fpga_header.kicad_sch`), per `backplane_notes.md`'s signal-integrity note |
-| Misc caps | 100nF ceramic (decoupling), 0.1uF (MAX3232 charge pump), 100pF (nINT filter), low-ESR bulk x2 (DE0-Nano feed, Pico-W VSYS) | 0603/0805 | — | |
+| Level-shifter decoupling, 100nF | — | 0603 | 12 | 2 per SN74LVC8T245 (VCCA/3V3 + VCCB/5V) x6 chips — **PCB layout: place each cap close to its IC's respective supply pin**, not just electrically on the right net |
+| Misc caps | 0.1uF (MAX3232 charge pump), 100pF (nINT filter), low-ESR bulk x2 (DE0-Nano feed, Pico-W VSYS) | 0603/0805 | — | |
 | Schottky diode | 1N5817 (or equivalent) | SMA/DO-214AC or THT | 1 | anode on board +5V, cathode on Pico-W VSYS (pin 39) — back-feed protection |
 
 ## Open questions
@@ -388,7 +397,8 @@ open decisions:
 3. Redraw the PCB outline to the real 100x160mm floorplan from
    `Eurocard.md`: place the DE0-Nano mounting holes at the coordinates in
    §7, lay out the two 40-pin headers, the DIN41617 connector, the 6 level
-   shifters (+ the 2x11 future-expansion header), the Pico-W header,
+   shifters (+ the 2x11 future-expansion header) **with their 12 decoupling
+   caps placed close to each IC's VCCA/VCCB pins (§2)**, the Pico-W header,
    MAX3232, DB9, and the 2-pin DE0-Nano power feed, then route.
 4. `kicad-cli10 sch export bom` / JLCPCB BOM+CPL export once parts are
    placed; check every part against current JLCPCB/LCSC stock before
