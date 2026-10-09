@@ -141,9 +141,29 @@ Not connected to the backplane — these drive a dedicated on-board header for
 future ideas (e.g. a DMA/debug daughter-board):
 - Outputs (4): `CS[0]` `CS[1]` `EX_OUT[0]` `EX_OUT[1]`
 - Inputs (7, need 10k pull-up each): `nEF[3]` `nCLEAR` `nWAIT` `nDMA_OUT`
-  `nDMA_IN` `EX_IN[0]` `EX_IN[1]`
+  `nDMA_IN` `EX_IN[0]` `EX_IN[1]` — **implemented**: 10k to +5V on each
+  `EXP_*` net (B-side, i.e. the header side) in `level_shifters.kicad_sch`.
 
 User's plan: a double-row header, 11 pins of signal + 11 pins of GND.
+
+**Spare-channel handling (2026-10-09, found during GUI schematic review)**:
+with 11 of 16 channels on the two future-expansion chips in use, and 5 of 8
+on the backplane "IN" chip, the spare channels needed a defined state rather
+than floating:
+- U4 (backplane IN chip) B-side spares (pins 14/15/16, i.e. B8/B7/B6 —
+  backplane-side, currently unused capacity): 10k pull-up to +5V each, same
+  treatment as the real backplane inputs they sit alongside.
+- U6 (future-expansion IN chip) B-side spare (pin 14, B8): 10k pull-up to +5V.
+- U5 (future-expansion OUT chip) A-side spares (pins 7/8/9/10, i.e. A5-A8 —
+  FPGA side, unused chip inputs since DIR is tied A→B): hard-tied to GND
+  (no resistor — these are unused transceiver *inputs*, not nets needing a
+  weak pull, so a direct tie is correct and avoids a floating CMOS input).
+  ERC reports this as a `pin_to_pin` warning ("Bidirectional and Power
+  output are connected") — expected and benign, exactly what a hard tie to
+  GND looks like from ERC's perspective.
+- U4's own A-side spares and U5/U6's *other*-side spares (A6-A8 on U4;
+  B5-B8 on U5; A8 on U6) were left as `no_connect` — genuinely unused chip
+  capacity on our own side, nothing external to float against.
 
 ## 3. FPGA pin assignment (`cs1800.qsf`)
 
@@ -270,9 +290,13 @@ in `Eurocard.md` + the mounting-hole coordinates above yet.
 
 DE0-Nano reaches the level shifters over a 40-pin ribbon cable (JP1). LVTTL
 edges are 1-2ns regardless of the 4MHz clock rate, so: series termination
-~33-47Ω at the FPGA end on the fast outputs (`TPA`, `TPB`, `nMRD`, `nMWR`);
-interleave grounds on the ribbon wherever the header allows; keep the DATA
-group's ribbon length matched to `TPB`'s (CDP1854 hold-margin budget).
+at the FPGA end on the fast outputs (`TPA`, `TPB`, `nMRD`, `nMWR`) —
+**implemented as 10Ω** (`fpga_header.kicad_sch`, R20-R23, between J1's pins
+and the `*_FPGA`-suffixed net that feeds the level shifter; the plain net
+name continues on unchanged into `level_shifters.kicad_sch`), chosen by the
+user over the originally-suggested 33-47Ω range; interleave grounds on the
+ribbon wherever the header allows; keep the DATA group's ribbon length
+matched to `TPB`'s (CDP1854 hold-margin budget).
 
 ## 9. CDP1802 core — tri-state pattern at the FPGA boundary
 
@@ -324,7 +348,8 @@ impossible in FPGA fabric, pin-boundary tri-states are normal.
 | DE0-Nano interface headers | 2x20 (0.1") IDC box header, 40-pin | THT | 2 | JP1 (GPIO_0, to level shifters) + JP2 (GPIO_1, to Pico-W/local) |
 | DE0-Nano power feed | 2-pin header | THT | 1 | backplane +5V/GND to DE0-Nano, + low-ESR bulk cap |
 | Future-expansion header | 2x11 (or 2x12) pin header | THT | 1 | 11 level-shifted CDP1802 control signals + 11 GND |
-| Pull-up resistors, 10k | — | 0805/0603 | ~18 | backplane: D0-D7, LC, nEF1-3, nINT (9); control header inputs: nEF[3], nCLEAR, nWAIT, nDMA_OUT, nDMA_IN, EX_IN[0:1] (7); front panel switches/buttons (6) — tally precisely once schematics are wired |
+| Pull-up resistors, 10k | — | 0603 | 29 | backplane: D0-D7, LC, nEF1-3, nINT (12); future-expansion header inputs EXP_* (7); spare level-shifter channels U4/U6 (4); front panel switches/buttons (6) |
+| Series resistors, 10Ω | — | 0603 | 4 | `TPA`/`TPB`/`nMRD`/`nMWR`, at the FPGA end (`fpga_header.kicad_sch`), per `backplane_notes.md`'s signal-integrity note |
 | Misc caps | 100nF ceramic (decoupling), 0.1uF (MAX3232 charge pump), 100pF (nINT filter), low-ESR bulk x2 (DE0-Nano feed, Pico-W VSYS) | 0603/0805 | — | |
 | Schottky diode | 1N5817 (or equivalent) | SMA/DO-214AC or THT | 1 | anode on board +5V, cathode on Pico-W VSYS (pin 39) — back-feed protection |
 

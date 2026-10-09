@@ -17,6 +17,7 @@ fp-info-cache
 # KiCad local/project-cache files that are machine-specific
 **/*-backups/
 *.kicad_prl
+.history/
 
 # JLCPCB export working files (generated, not source)
 jlcpcb/*.zip

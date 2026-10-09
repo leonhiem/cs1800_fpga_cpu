@@ -2100,33 +2100,13 @@
 	)
 	(wire
 		(pts
-			(xy 123.19 46.99) (xy 125.73 46.99)
+			(xy 123.19 46.99) (xy 134.62 46.99)
 		)
 		(stroke
 			(width 0)
 			(type default)
 		)
 		(uuid "03ed19fc-bf2a-4ffc-be21-61e422002a06")
-	)
-	(wire
-		(pts
-			(xy 100.33 95.25) (xy 100.33 97.79)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "10080ef6-f0a8-4412-92fc-b02ac0db343f")
-	)
-	(wire
-		(pts
-			(xy 100.33 95.25) (xy 100.33 97.79)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "157a87e0-d151-48d2-b496-509a69f6df4e")
 	)
 	(wire
 		(pts
@@ -2150,17 +2130,7 @@
 	)
 	(wire
 		(pts
-			(xy 100.33 95.25) (xy 100.33 97.79)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "2d9279ed-95c7-457c-b99e-5837dba63f59")
-	)
-	(wire
-		(pts
-			(xy 77.47 80.01) (xy 74.93 80.01)
+			(xy 77.47 80.01) (xy 59.69 80.01)
 		)
 		(stroke
 			(width 0)
@@ -2170,7 +2140,17 @@
 	)
 	(wire
 		(pts
-			(xy 77.47 46.99) (xy 74.93 46.99)
+			(xy 146.05 25.4) (xy 139.7 25.4)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "48e563cb-ebdf-4dbb-a059-b2ff1113b36f")
+	)
+	(wire
+		(pts
+			(xy 77.47 46.99) (xy 60.96 46.99)
 		)
 		(stroke
 			(width 0)
@@ -2180,7 +2160,7 @@
 	)
 	(wire
 		(pts
-			(xy 77.47 44.45) (xy 74.93 44.45)
+			(xy 77.47 44.45) (xy 60.96 44.45)
 		)
 		(stroke
 			(width 0)
@@ -2190,7 +2170,7 @@
 	)
 	(wire
 		(pts
-			(xy 55.88 100.33) (xy 53.34 100.33)
+			(xy 54.61 106.68) (xy 53.34 106.68)
 		)
 		(stroke
 			(width 0)
@@ -2210,7 +2190,7 @@
 	)
 	(wire
 		(pts
-			(xy 77.47 36.83) (xy 74.93 36.83)
+			(xy 77.47 36.83) (xy 60.96 36.83)
 		)
 		(stroke
 			(width 0)
@@ -2230,7 +2210,17 @@
 	)
 	(wire
 		(pts
-			(xy 123.19 49.53) (xy 125.73 49.53)
+			(xy 139.7 25.4) (xy 139.7 24.13)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "7a401507-f1b4-43b7-82ab-e1627fcc2c4a")
+	)
+	(wire
+		(pts
+			(xy 123.19 49.53) (xy 134.62 49.53)
 		)
 		(stroke
 			(width 0)
@@ -2250,33 +2240,13 @@
 	)
 	(wire
 		(pts
-			(xy 139.7 24.13) (xy 139.7 26.67)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "869cb3fe-cbd0-4b38-88f3-839972330ebe")
-	)
-	(wire
-		(pts
-			(xy 77.47 54.61) (xy 74.93 54.61)
+			(xy 77.47 54.61) (xy 57.15 54.61)
 		)
 		(stroke
 			(width 0)
 			(type default)
 		)
 		(uuid "8e3f96f9-f709-420a-ba33-eba07c2b839b")
-	)
-	(wire
-		(pts
-			(xy 100.33 95.25) (xy 100.33 97.79)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "91b3bb01-fc07-4540-bf4e-14b468609333")
 	)
 	(wire
 		(pts
@@ -2300,17 +2270,17 @@
 	)
 	(wire
 		(pts
-			(xy 100.33 95.25) (xy 100.33 97.79)
+			(xy 54.61 106.68) (xy 54.61 100.33)
 		)
 		(stroke
 			(width 0)
 			(type default)
 		)
-		(uuid "9867a2ac-1e2c-40f4-92fa-315bf66a57e3")
+		(uuid "ad570978-fdf5-4882-8b5d-e8a58ec72091")
 	)
 	(wire
 		(pts
-			(xy 77.47 57.15) (xy 74.93 57.15)
+			(xy 77.47 57.15) (xy 57.15 57.15)
 		)
 		(stroke
 			(width 0)
@@ -2320,7 +2290,7 @@
 	)
 	(wire
 		(pts
-			(xy 77.47 82.55) (xy 74.93 82.55)
+			(xy 77.47 82.55) (xy 59.69 82.55)
 		)
 		(stroke
 			(width 0)
@@ -2330,7 +2300,7 @@
 	)
 	(wire
 		(pts
-			(xy 80.01 100.33) (xy 80.01 102.87)
+			(xy 73.66 101.6) (xy 73.66 105.41)
 		)
 		(stroke
 			(width 0)
@@ -2350,13 +2320,33 @@
 	)
 	(wire
 		(pts
-			(xy 100.33 95.25) (xy 100.33 97.79)
+			(xy 54.61 100.33) (xy 55.88 100.33)
 		)
 		(stroke
 			(width 0)
 			(type default)
 		)
-		(uuid "d8544e7c-62c4-4332-97c7-3ca32f1612b4")
+		(uuid "d5556f5b-a14c-47f7-b250-cb0494190eba")
+	)
+	(wire
+		(pts
+			(xy 73.66 101.6) (xy 80.01 101.6)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "e9391adf-656a-4b6c-9274-c1cc2941d5d0")
+	)
+	(wire
+		(pts
+			(xy 80.01 101.6) (xy 80.01 100.33)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "ea639f6d-dedd-49c0-8b2f-e456cdeb9141")
 	)
 	(wire
 		(pts
@@ -2370,7 +2360,7 @@
 	)
 	(global_label "PICO[3]"
 		(shape input)
-		(at 125.73 49.53 0)
+		(at 134.62 49.53 0)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -2378,7 +2368,7 @@
 		)
 		(uuid "0a55991c-026f-42b4-aff6-4d0269a555d9")
 		(property "Intersheetrefs" "${INTERSHEET_REFS}"
-			(at 125.73 49.53 0)
+			(at 134.62 49.53 0)
 			(hide yes)
 			(show_name no)
 			(do_not_autoplace no)
@@ -2391,7 +2381,7 @@
 	)
 	(global_label "UART0_RXD"
 		(shape input)
-		(at 74.93 44.45 0)
+		(at 60.96 44.45 0)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -2399,7 +2389,7 @@
 		)
 		(uuid "0c8fea60-7678-4405-8a20-ba568035f15d")
 		(property "Intersheetrefs" "${INTERSHEET_REFS}"
-			(at 74.93 44.45 0)
+			(at 60.96 44.45 0)
 			(hide yes)
 			(show_name no)
 			(do_not_autoplace no)
@@ -2412,7 +2402,7 @@
 	)
 	(global_label "PICO_VSYS"
 		(shape input)
-		(at 53.34 100.33 0)
+		(at 53.34 106.68 0)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -2420,7 +2410,7 @@
 		)
 		(uuid "193fe2bc-f7cb-447d-a71d-8e245cb8f22a")
 		(property "Intersheetrefs" "${INTERSHEET_REFS}"
-			(at 53.34 100.33 0)
+			(at 53.34 106.68 0)
 			(hide yes)
 			(show_name no)
 			(do_not_autoplace no)
@@ -2433,7 +2423,7 @@
 	)
 	(global_label "PICO_RUN"
 		(shape input)
-		(at 74.93 36.83 0)
+		(at 60.96 36.83 0)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -2441,7 +2431,7 @@
 		)
 		(uuid "1f7d82fd-8c97-4b77-8d6e-eafa264099a0")
 		(property "Intersheetrefs" "${INTERSHEET_REFS}"
-			(at 74.93 36.83 0)
+			(at 60.96 36.83 0)
 			(hide yes)
 			(show_name no)
 			(do_not_autoplace no)
@@ -2475,7 +2465,7 @@
 	)
 	(global_label "PICO_UART1_TX"
 		(shape input)
-		(at 74.93 54.61 0)
+		(at 57.15 54.61 0)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -2483,7 +2473,7 @@
 		)
 		(uuid "30cb606a-2e2f-4e12-8298-9b9ee99f988b")
 		(property "Intersheetrefs" "${INTERSHEET_REFS}"
-			(at 74.93 54.61 0)
+			(at 57.15 54.61 0)
 			(hide yes)
 			(show_name no)
 			(do_not_autoplace no)
@@ -2496,7 +2486,7 @@
 	)
 	(global_label "PICO[1]"
 		(shape input)
-		(at 74.93 82.55 0)
+		(at 59.69 82.55 0)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -2504,7 +2494,7 @@
 		)
 		(uuid "4147fdcd-807e-4e38-9b87-e3a5437809d9")
 		(property "Intersheetrefs" "${INTERSHEET_REFS}"
-			(at 74.93 82.55 0)
+			(at 59.69 82.55 0)
 			(hide yes)
 			(show_name no)
 			(do_not_autoplace no)
@@ -2517,7 +2507,7 @@
 	)
 	(global_label "PICO_VSYS"
 		(shape input)
-		(at 80.01 102.87 90)
+		(at 73.66 105.41 90)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -2525,7 +2515,7 @@
 		)
 		(uuid "51744a30-aa95-4f86-8bbf-09ef32f090fa")
 		(property "Intersheetrefs" "${INTERSHEET_REFS}"
-			(at 80.01 102.87 0)
+			(at 73.66 105.41 0)
 			(hide yes)
 			(show_name no)
 			(do_not_autoplace no)
@@ -2538,7 +2528,7 @@
 	)
 	(global_label "PICO[0]"
 		(shape input)
-		(at 74.93 80.01 0)
+		(at 59.69 80.01 0)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -2546,7 +2536,7 @@
 		)
 		(uuid "771606c8-ff1f-4a27-a0dc-ae54c676e20e")
 		(property "Intersheetrefs" "${INTERSHEET_REFS}"
-			(at 74.93 80.01 0)
+			(at 59.69 80.01 0)
 			(hide yes)
 			(show_name no)
 			(do_not_autoplace no)
@@ -2559,7 +2549,7 @@
 	)
 	(global_label "UART0_TXD"
 		(shape input)
-		(at 74.93 46.99 0)
+		(at 60.96 46.99 0)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -2567,7 +2557,7 @@
 		)
 		(uuid "8c69b9dc-8a48-4962-bef3-0f162db0ce33")
 		(property "Intersheetrefs" "${INTERSHEET_REFS}"
-			(at 74.93 46.99 0)
+			(at 60.96 46.99 0)
 			(hide yes)
 			(show_name no)
 			(do_not_autoplace no)
@@ -2580,7 +2570,7 @@
 	)
 	(global_label "PICO_RUN"
 		(shape input)
-		(at 139.7 26.67 90)
+		(at 146.05 25.4 90)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -2588,7 +2578,7 @@
 		)
 		(uuid "96abef1d-ea90-4cc9-96e8-bdd6153516fc")
 		(property "Intersheetrefs" "${INTERSHEET_REFS}"
-			(at 139.7 26.67 0)
+			(at 146.05 25.4 0)
 			(hide yes)
 			(show_name no)
 			(do_not_autoplace no)
@@ -2622,7 +2612,7 @@
 	)
 	(global_label "PICO[2]"
 		(shape input)
-		(at 125.73 46.99 0)
+		(at 134.62 46.99 0)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -2630,7 +2620,7 @@
 		)
 		(uuid "ad422787-1f65-4573-ac24-f647d06bedcc")
 		(property "Intersheetrefs" "${INTERSHEET_REFS}"
-			(at 125.73 46.99 0)
+			(at 134.62 46.99 0)
 			(hide yes)
 			(show_name no)
 			(do_not_autoplace no)
@@ -2685,7 +2675,7 @@
 	)
 	(global_label "PICO_UART1_RX"
 		(shape input)
-		(at 74.93 57.15 0)
+		(at 57.15 57.15 0)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -2693,7 +2683,7 @@
 		)
 		(uuid "e7029e9c-9114-42be-9726-633b2804cbfd")
 		(property "Intersheetrefs" "${INTERSHEET_REFS}"
-			(at 74.93 57.15 0)
+			(at 57.15 57.15 0)
 			(hide yes)
 			(show_name no)
 			(do_not_autoplace no)
@@ -2790,6 +2780,14 @@
 		(pin "1"
 			(uuid "fe719a02-d231-4639-93a2-224ceddfb359")
 		)
+		(instances
+			(project "de0nano_cpu_card"
+				(path "/0daab69e-2257-45dd-abd7-efbe947cce3e/869c89e1-96aa-439b-bac8-8b2b26d1ef4c"
+					(reference "#PWR")
+					(unit 1)
+				)
+			)
+		)
 	)
 	(symbol
 		(lib_id "Device:D_Schottky")
@@ -2859,6 +2857,14 @@
 		(pin "2"
 			(uuid "ed4668aa-5c20-4877-9806-9fb20e0c221d")
 		)
+		(instances
+			(project "de0nano_cpu_card"
+				(path "/0daab69e-2257-45dd-abd7-efbe947cce3e/869c89e1-96aa-439b-bac8-8b2b26d1ef4c"
+					(reference "D1")
+					(unit 1)
+				)
+			)
+		)
 	)
 	(symbol
 		(lib_id "power:GND")
@@ -2924,6 +2930,14 @@
 		)
 		(pin "1"
 			(uuid "6ffcd292-98d8-4e56-9f58-d67f3fbf68b1")
+		)
+		(instances
+			(project "de0nano_cpu_card"
+				(path "/0daab69e-2257-45dd-abd7-efbe947cce3e/869c89e1-96aa-439b-bac8-8b2b26d1ef4c"
+					(reference "#PWR")
+					(unit 1)
+				)
+			)
 		)
 	)
 	(symbol
@@ -2994,6 +3008,14 @@
 		(pin "2"
 			(uuid "b4c5f225-1510-4e35-a368-d70a14fd827b")
 		)
+		(instances
+			(project "de0nano_cpu_card"
+				(path "/0daab69e-2257-45dd-abd7-efbe947cce3e/869c89e1-96aa-439b-bac8-8b2b26d1ef4c"
+					(reference "C1")
+					(unit 1)
+				)
+			)
+		)
 	)
 	(symbol
 		(lib_id "Device:R")
@@ -3063,6 +3085,14 @@
 		(pin "2"
 			(uuid "8bd3ee75-61b2-433b-b29f-e6fd5ced30ae")
 		)
+		(instances
+			(project "de0nano_cpu_card"
+				(path "/0daab69e-2257-45dd-abd7-efbe947cce3e/869c89e1-96aa-439b-bac8-8b2b26d1ef4c"
+					(reference "R1")
+					(unit 1)
+				)
+			)
+		)
 	)
 	(symbol
 		(lib_id "power:GND")
@@ -3128,6 +3158,14 @@
 		)
 		(pin "1"
 			(uuid "ad9c7a2e-0c85-40cb-9f2f-bd54d088bf1d")
+		)
+		(instances
+			(project "de0nano_cpu_card"
+				(path "/0daab69e-2257-45dd-abd7-efbe947cce3e/869c89e1-96aa-439b-bac8-8b2b26d1ef4c"
+					(reference "#PWR")
+					(unit 1)
+				)
+			)
 		)
 	)
 	(symbol
@@ -3312,6 +3350,14 @@
 		(pin "40"
 			(uuid "b492b466-5e46-49f7-8f80-07e54f4c4de5")
 		)
+		(instances
+			(project "de0nano_cpu_card"
+				(path "/0daab69e-2257-45dd-abd7-efbe947cce3e/869c89e1-96aa-439b-bac8-8b2b26d1ef4c"
+					(reference "A1")
+					(unit 1)
+				)
+			)
+		)
 	)
 	(symbol
 		(lib_id "power:GND")
@@ -3377,6 +3423,14 @@
 		)
 		(pin "1"
 			(uuid "a24b87b8-f1c5-42b7-a61f-b175145dcc85")
+		)
+		(instances
+			(project "de0nano_cpu_card"
+				(path "/0daab69e-2257-45dd-abd7-efbe947cce3e/869c89e1-96aa-439b-bac8-8b2b26d1ef4c"
+					(reference "#PWR")
+					(unit 1)
+				)
+			)
 		)
 	)
 	(symbol
@@ -3444,6 +3498,14 @@
 		(pin "1"
 			(uuid "e49e1720-21e5-42b6-bafe-ad9e704550d0")
 		)
+		(instances
+			(project "de0nano_cpu_card"
+				(path "/0daab69e-2257-45dd-abd7-efbe947cce3e/869c89e1-96aa-439b-bac8-8b2b26d1ef4c"
+					(reference "#PWR")
+					(unit 1)
+				)
+			)
+		)
 	)
 	(symbol
 		(lib_id "power:GND")
@@ -3509,6 +3571,14 @@
 		)
 		(pin "1"
 			(uuid "a35200b2-b92a-4ab8-a444-20a7d3a5d7a4")
+		)
+		(instances
+			(project "de0nano_cpu_card"
+				(path "/0daab69e-2257-45dd-abd7-efbe947cce3e/869c89e1-96aa-439b-bac8-8b2b26d1ef4c"
+					(reference "#PWR")
+					(unit 1)
+				)
+			)
 		)
 	)
 	(symbol
@@ -3576,6 +3646,14 @@
 		(pin "1"
 			(uuid "95330825-f325-4f5f-a7ac-581eeca1fb25")
 		)
+		(instances
+			(project "de0nano_cpu_card"
+				(path "/0daab69e-2257-45dd-abd7-efbe947cce3e/869c89e1-96aa-439b-bac8-8b2b26d1ef4c"
+					(reference "#PWR")
+					(unit 1)
+				)
+			)
+		)
 	)
 	(symbol
 		(lib_id "power:GND")
@@ -3641,6 +3719,14 @@
 		)
 		(pin "1"
 			(uuid "a4e60106-d118-49a7-b7f5-0c1d84e04871")
+		)
+		(instances
+			(project "de0nano_cpu_card"
+				(path "/0daab69e-2257-45dd-abd7-efbe947cce3e/869c89e1-96aa-439b-bac8-8b2b26d1ef4c"
+					(reference "#PWR")
+					(unit 1)
+				)
+			)
 		)
 	)
 	(symbol
@@ -3708,6 +3794,14 @@
 		(pin "1"
 			(uuid "785125ca-7452-4cb3-8914-ec3374da92d8")
 		)
+		(instances
+			(project "de0nano_cpu_card"
+				(path "/0daab69e-2257-45dd-abd7-efbe947cce3e/869c89e1-96aa-439b-bac8-8b2b26d1ef4c"
+					(reference "#PWR")
+					(unit 1)
+				)
+			)
+		)
 	)
 	(symbol
 		(lib_id "power:+5V")
@@ -3773,6 +3867,14 @@
 		)
 		(pin "1"
 			(uuid "545f245d-3eb8-4888-b626-a0fa5a62bc53")
+		)
+		(instances
+			(project "de0nano_cpu_card"
+				(path "/0daab69e-2257-45dd-abd7-efbe947cce3e/869c89e1-96aa-439b-bac8-8b2b26d1ef4c"
+					(reference "#PWR")
+					(unit 1)
+				)
+			)
 		)
 	)
 	(symbol
@@ -3840,6 +3942,14 @@
 		(pin "1"
 			(uuid "e72266af-88d7-4b5c-a597-e00d45cad0dc")
 		)
+		(instances
+			(project "de0nano_cpu_card"
+				(path "/0daab69e-2257-45dd-abd7-efbe947cce3e/869c89e1-96aa-439b-bac8-8b2b26d1ef4c"
+					(reference "#PWR")
+					(unit 1)
+				)
+			)
+		)
 	)
 	(symbol
 		(lib_id "power:PWR_FLAG")
@@ -3905,6 +4015,14 @@
 		)
 		(pin "1"
 			(uuid "35da615f-6450-4913-a788-53e199f6ad63")
+		)
+		(instances
+			(project "de0nano_cpu_card"
+				(path "/0daab69e-2257-45dd-abd7-efbe947cce3e/869c89e1-96aa-439b-bac8-8b2b26d1ef4c"
+					(reference "PF1")
+					(unit 1)
+				)
+			)
 		)
 	)
 )

@@ -696,7 +696,17 @@
 	)
 	(wire
 		(pts
-			(xy 34.29 41.91) (xy 31.75 41.91)
+			(xy 33.02 41.91) (xy 34.29 41.91)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "009d337f-97e8-4423-8d53-414717654b5e")
+	)
+	(wire
+		(pts
+			(xy 33.02 45.72) (xy 31.75 45.72)
 		)
 		(stroke
 			(width 0)
@@ -716,13 +726,33 @@
 	)
 	(wire
 		(pts
-			(xy 110.49 39.37) (xy 110.49 41.91)
+			(xy 97.79 40.64) (xy 97.79 41.91)
 		)
 		(stroke
 			(width 0)
 			(type default)
 		)
 		(uuid "63beb7de-2f2c-44d4-b411-48c57a9a4513")
+	)
+	(wire
+		(pts
+			(xy 143.51 40.64) (xy 129.54 40.64)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "72356359-ad1b-43dc-b20e-cf6ef598f52b")
+	)
+	(wire
+		(pts
+			(xy 129.54 40.64) (xy 129.54 39.37)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "9b1fcad6-12ba-465d-9dd7-6119466e5631")
 	)
 	(wire
 		(pts
@@ -746,17 +776,37 @@
 	)
 	(wire
 		(pts
-			(xy 129.54 39.37) (xy 129.54 41.91)
+			(xy 110.49 40.64) (xy 110.49 39.37)
 		)
 		(stroke
 			(width 0)
 			(type default)
 		)
-		(uuid "bf12d06d-3922-4f4c-b9e8-4e1688469fe7")
+		(uuid "a8bb41b6-9371-4ef0-a36e-79ffdd928616")
+	)
+	(wire
+		(pts
+			(xy 33.02 45.72) (xy 33.02 41.91)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "da82ba14-2c60-44f4-a3d9-075a112b91b0")
+	)
+	(wire
+		(pts
+			(xy 97.79 40.64) (xy 110.49 40.64)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "e1284917-807c-43ce-a295-e904829c0a69")
 	)
 	(global_label "+5V"
 		(shape input)
-		(at 110.49 41.91 90)
+		(at 97.79 41.91 90)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -764,7 +814,7 @@
 		)
 		(uuid "57d286c9-0d44-4804-9182-7afb0a31024e")
 		(property "Intersheetrefs" "${INTERSHEET_REFS}"
-			(at 110.49 41.91 0)
+			(at 97.79 41.91 0)
 			(hide yes)
 			(show_name no)
 			(do_not_autoplace no)
@@ -777,7 +827,7 @@
 	)
 	(global_label "+3V3"
 		(shape input)
-		(at 129.54 41.91 90)
+		(at 143.51 40.64 90)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -785,7 +835,7 @@
 		)
 		(uuid "606e4246-7f89-4164-a8d6-9b7c4c22295e")
 		(property "Intersheetrefs" "${INTERSHEET_REFS}"
-			(at 129.54 41.91 0)
+			(at 143.51 40.64 0)
 			(hide yes)
 			(show_name no)
 			(do_not_autoplace no)
@@ -861,6 +911,14 @@
 		(pin "1"
 			(uuid "557f6e49-84ec-44f8-ad2b-4873eb8606ea")
 		)
+		(instances
+			(project "de0nano_cpu_card"
+				(path "/0daab69e-2257-45dd-abd7-efbe947cce3e/8b002943-6b27-46a8-b3d0-f29a8b6e36ed"
+					(reference "#PWR")
+					(unit 1)
+				)
+			)
+		)
 	)
 	(symbol
 		(lib_id "power:PWR_FLAG")
@@ -927,10 +985,18 @@
 		(pin "1"
 			(uuid "284e6934-45ae-4018-bf93-4ffd2893fc61")
 		)
+		(instances
+			(project "de0nano_cpu_card"
+				(path "/0daab69e-2257-45dd-abd7-efbe947cce3e/8b002943-6b27-46a8-b3d0-f29a8b6e36ed"
+					(reference "PF2")
+					(unit 1)
+				)
+			)
+		)
 	)
 	(symbol
 		(lib_id "power:GND")
-		(at 31.75 41.91 0)
+		(at 31.75 45.72 0)
 		(unit 1)
 		(body_style 1)
 		(exclude_from_sim no)
@@ -940,7 +1006,7 @@
 		(dnp no)
 		(uuid "419a8dfb-331b-49e5-9d2b-08d1cc68b0ca")
 		(property "Reference" "#PWR"
-			(at 31.75 41.91 0)
+			(at 31.75 45.72 0)
 			(hide yes)
 			(show_name no)
 			(do_not_autoplace no)
@@ -951,7 +1017,7 @@
 			)
 		)
 		(property "Value" "GND"
-			(at 31.75 39.37 0)
+			(at 31.75 43.18 0)
 			(show_name no)
 			(do_not_autoplace no)
 			(effects
@@ -961,7 +1027,7 @@
 			)
 		)
 		(property "Footprint" ""
-			(at 31.75 41.91 0)
+			(at 31.75 45.72 0)
 			(show_name no)
 			(do_not_autoplace no)
 			(effects
@@ -971,7 +1037,7 @@
 			)
 		)
 		(property "Datasheet" ""
-			(at 31.75 41.91 0)
+			(at 31.75 45.72 0)
 			(show_name no)
 			(do_not_autoplace no)
 			(effects
@@ -981,7 +1047,7 @@
 			)
 		)
 		(property "Description" ""
-			(at 31.75 41.91 0)
+			(at 31.75 45.72 0)
 			(show_name no)
 			(do_not_autoplace no)
 			(effects
@@ -992,6 +1058,14 @@
 		)
 		(pin "1"
 			(uuid "2dc85420-0c82-4f95-b1dd-5bef34e5a79a")
+		)
+		(instances
+			(project "de0nano_cpu_card"
+				(path "/0daab69e-2257-45dd-abd7-efbe947cce3e/8b002943-6b27-46a8-b3d0-f29a8b6e36ed"
+					(reference "#PWR")
+					(unit 1)
+				)
+			)
 		)
 	)
 	(symbol
@@ -1062,6 +1136,14 @@
 		(pin "2"
 			(uuid "e41debb4-3256-45a2-98b2-c96e4fb94f39")
 		)
+		(instances
+			(project "de0nano_cpu_card"
+				(path "/0daab69e-2257-45dd-abd7-efbe947cce3e/8b002943-6b27-46a8-b3d0-f29a8b6e36ed"
+					(reference "C1")
+					(unit 1)
+				)
+			)
+		)
 	)
 	(symbol
 		(lib_id "Connector_Generic:Conn_01x02")
@@ -1131,6 +1213,14 @@
 		(pin "2"
 			(uuid "c729f23c-69c6-44ab-8401-b3f1da642b5b")
 		)
+		(instances
+			(project "de0nano_cpu_card"
+				(path "/0daab69e-2257-45dd-abd7-efbe947cce3e/8b002943-6b27-46a8-b3d0-f29a8b6e36ed"
+					(reference "P1")
+					(unit 1)
+				)
+			)
+		)
 	)
 	(symbol
 		(lib_id "power:PWR_FLAG")
@@ -1196,6 +1286,14 @@
 		)
 		(pin "1"
 			(uuid "78922264-3f0c-43d9-8942-324cc6a11d99")
+		)
+		(instances
+			(project "de0nano_cpu_card"
+				(path "/0daab69e-2257-45dd-abd7-efbe947cce3e/8b002943-6b27-46a8-b3d0-f29a8b6e36ed"
+					(reference "PF1")
+					(unit 1)
+				)
+			)
 		)
 	)
 	(symbol
@@ -1263,6 +1361,14 @@
 		(pin "1"
 			(uuid "be93b1af-64fb-4294-911d-dc6335b7a7d1")
 		)
+		(instances
+			(project "de0nano_cpu_card"
+				(path "/0daab69e-2257-45dd-abd7-efbe947cce3e/8b002943-6b27-46a8-b3d0-f29a8b6e36ed"
+					(reference "#PWR")
+					(unit 1)
+				)
+			)
+		)
 	)
 	(symbol
 		(lib_id "power:+5V")
@@ -1328,6 +1434,14 @@
 		)
 		(pin "1"
 			(uuid "a309307b-3dc5-4eb2-afcf-1ed83e4aa644")
+		)
+		(instances
+			(project "de0nano_cpu_card"
+				(path "/0daab69e-2257-45dd-abd7-efbe947cce3e/8b002943-6b27-46a8-b3d0-f29a8b6e36ed"
+					(reference "#PWR")
+					(unit 1)
+				)
+			)
 		)
 	)
 )

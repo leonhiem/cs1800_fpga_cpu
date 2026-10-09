@@ -34,10 +34,41 @@ python3 build_level_shifters.py   # (or any of the other build_*.py)
 ~/bin/kicad-cli10 sch erc ../de0nano_cpu_card.kicad_sch   # validate the whole hierarchy
 ```
 
-Each `build_*.py` regenerates exactly one sheet from scratch (declarative:
-component placement + a `{pin_number: net_name}` map per component) — re-run
-the relevant one after changing a pinout doc, rather than hand-editing the
-`.kicad_sch` output.
+**⚠️ As of 2026-10-09, don't just re-run a `build_*.py` anymore.** The user
+has since opened the project in the real KiCad GUI and manually rearranged
+component positions on several sheets (to de-clutter the generator's naive
+grid layout). A `build_*.py` regenerates its sheet completely from scratch —
+re-running one would silently throw away that layout work, placing
+everything back at the generator's original grid coordinates.
+
+If a pinout/net change is needed on an already-laid-out sheet, write a
+small one-off patch script instead (see `patch_level_shifters_pullups.py`
+and `patch_fpga_header_series_r.py` for worked examples) that:
+1. Reads the *current* `.kicad_sch` file as text.
+2. Finds the existing component's *current* position (grep/regex for its
+   `(property "Reference" "U4" ...)` block, then the `(at CX CY ROT)` a few
+   lines above it — do NOT assume it's still at the position the original
+   `build_*.py` placed it).
+3. Uses `kicadgen.transform()` with that current position to compute exact
+   absolute pin coordinates (don't hand-guess them).
+4. Surgically edits: renames a `global_label`'s text in place (for "insert a
+   component in series on an existing net"), and/or removes a specific
+   `(no_connect (at X Y) (uuid ...))` block and replaces it with a real
+   wire+label/power connection (for "this spare pin needs to go from NC to
+   pulled-up/tied"), and/or appends new component+wire+label blocks just
+   before the file's final closing paren (for "add a new part").
+5. Leaves everything else in the file untouched, so the user's layout survives.
+6. Validate the same way: `sch upgrade` then `sch erc` on the whole hierarchy.
+
+Only fall back to a full `build_*.py` regeneration if the user confirms
+they're fine re-doing their layout pass afterward (or hasn't laid the sheet
+out yet).
+
+`build_*.py` still regenerates its sheet from scratch (declarative:
+component placement + a `{pin_number: net_name}` map per component) when
+that's actually what's wanted — e.g. a sheet nobody has touched in the GUI
+yet, or a from-scratch pinout change the user explicitly wants to blow away
+prior layout for.
 
 ## `symstage/`
 

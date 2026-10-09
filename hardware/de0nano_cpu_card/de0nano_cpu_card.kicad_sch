@@ -50,6 +50,13 @@
 				(justify left top)
 			)
 		)
+		(instances
+			(project "de0nano_cpu_card"
+				(path "/0daab69e-2257-45dd-abd7-efbe947cce3e"
+					(page "8")
+				)
+			)
+		)
 	)
 	(sheet
 		(at 20 30)
@@ -86,6 +93,13 @@
 					(size 1.27 1.27)
 				)
 				(justify left top)
+			)
+		)
+		(instances
+			(project "de0nano_cpu_card"
+				(path "/0daab69e-2257-45dd-abd7-efbe947cce3e"
+					(page "2")
+				)
 			)
 		)
 	)
@@ -126,6 +140,13 @@
 				(justify left top)
 			)
 		)
+		(instances
+			(project "de0nano_cpu_card"
+				(path "/0daab69e-2257-45dd-abd7-efbe947cce3e"
+					(page "4")
+				)
+			)
+		)
 	)
 	(sheet
 		(at 120 100)
@@ -162,6 +183,13 @@
 					(size 1.27 1.27)
 				)
 				(justify left top)
+			)
+		)
+		(instances
+			(project "de0nano_cpu_card"
+				(path "/0daab69e-2257-45dd-abd7-efbe947cce3e"
+					(page "6")
+				)
 			)
 		)
 	)
@@ -202,6 +230,13 @@
 				(justify left top)
 			)
 		)
+		(instances
+			(project "de0nano_cpu_card"
+				(path "/0daab69e-2257-45dd-abd7-efbe947cce3e"
+					(page "3")
+				)
+			)
+		)
 	)
 	(sheet
 		(at 220 30)
@@ -238,6 +273,13 @@
 					(size 1.27 1.27)
 				)
 				(justify left top)
+			)
+		)
+		(instances
+			(project "de0nano_cpu_card"
+				(path "/0daab69e-2257-45dd-abd7-efbe947cce3e"
+					(page "7")
+				)
 			)
 		)
 	)
@@ -278,5 +320,18 @@
 				(justify left top)
 			)
 		)
+		(instances
+			(project "de0nano_cpu_card"
+				(path "/0daab69e-2257-45dd-abd7-efbe947cce3e"
+					(page "5")
+				)
+			)
+		)
 	)
+	(sheet_instances
+		(path "/"
+			(page "1")
+		)
+	)
+	(embedded_fonts no)
 )
