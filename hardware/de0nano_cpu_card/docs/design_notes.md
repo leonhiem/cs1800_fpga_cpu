@@ -7,11 +7,11 @@ is the synthesis of them, kept in sync as they change.*
 
 ## Status (2026-10-09)
 
-Architecture is now almost fully pinned down. The FPGA pin assignment
-(`cs1800.qsf`) exists and is the source of truth for every signal name and
-pin location below — read it directly for anything not summarized here.
-Remaining open items are mechanical/sourcing details, not architecture
-decisions. See "Open questions" at the end.
+**Architecture and mechanical/sourcing are now fully resolved.** The FPGA
+pin assignment (`cs1800.qsf`) is the source of truth for every signal name
+and pin location below. Nothing left in "Open questions" — what remains is
+pure execution: wire the schematic sheets (still placeholders), build the
+custom footprints, redraw the PCB to the real floorplan, route.
 
 ## Purpose
 
@@ -167,18 +167,22 @@ telnet:
 | 6, 7 | UART1 (slow, 4800 baud) | MAX3232 TTL side |
 | 19,20,21,22,24,25,26,27 | `PICO[0:7]` spare GPIO | DE0-Nano JP2 pins 17,16,15,14,13,10,9,8 |
 | 3,8,13,18,23,28,33,38 | GND | board GND |
-| 39 | VSYS | board +5V — **check whether back-feed protection (Pico-W's own on-board VSYS/VBUS diode, or an added one) is sufficient** so the backplane 5V and USB-supplied 5V can't fight when the front-panel USB cable is plugged in |
+| 39 | VSYS | board +5V, **through a Schottky diode** (e.g. 1N5817): anode on the board's +5V rail, cathode on VSYS pin 39 |
 
-Also needs a low-ESR bulk capacitor on its power supply line (per
-`Eurocard.md`).
+Also needs a low-ESR bulk capacitor on its power supply line. **Back-feed
+protection resolved**: the Schottky diode on VSYS does two jobs — stops the
+Pico-W's own USB-supplied 5V (when the front-panel USB cable is plugged
+into a PC) from back-feeding onto this board's +5V rail, and protects the
+board's local +5V rail if something upstream of VSYS ever pushes more than
+5V in via USB. Only current flow board-5V → VSYS is allowed.
 
 ## 5. RS232 (MAX3232 + DB9)
 
 DB9, 9-pin, 90°/right-angle, soldered directly to the PCB (not panel-mount
 hardware): pin2=RXD, pin3=TXD, pin5=GND. MAX3232 TTL side wired to Pico-W
-UART1 (pins 6/7). **Part not yet chosen** — two candidates found in stock at
-LCSC/JLCPCB: `MAX3232EIDR` (SOIC-16) or `MAX3232IPW` (TSSOP-16). Either
-needs 4x 0.1uF charge-pump ceramic caps.
+UART1 (pins 6/7). **Part chosen: `MAX3232EIDR`, SOIC-16** (picked over
+`MAX3232IPW`/TSSOP-16 for easier hand-handling). Needs 4x 0.1uF charge-pump
+ceramic caps.
 
 ## 6. Front panel (all confirmed, see `Eurocard.md` for the full floorplan)
 
@@ -197,19 +201,41 @@ needs 4x 0.1uF charge-pump ceramic caps.
 ## 7. Mechanical / Eurocard floorplan
 
 Board: 100mm (front-panel height) x 160mm (depth) — standard single-Eurocard
-3U PCB size. Full component floorplan (ASCII) in `Eurocard.md`. DE0-Nano
-board size: **49 x 75.2mm**. Two 40-pin headers on this board mate with the
-DE0-Nano's GPIO_0 (JP1, to backplane via level shifters) and GPIO_1 (JP2, to
-Pico-W/future-header/front-panel) via ribbon cables. A 2-pin header ("P" in
-the floorplan) feeds the DE0-Nano +5V/GND from the backplane — needs a
-low-ESR bulk cap there too.
+3U PCB size. Full component floorplan (ASCII) in `Eurocard.md`. Two 40-pin
+headers on this board mate with the DE0-Nano's GPIO_0 (JP1/H0, to backplane
+via level shifters, on the backplane-connector side of the floorplan) and
+GPIO_1 (JP2/H1, to Pico-W/future-header/front-panel, on the front-panel side
+of the floorplan) via ribbon cables. A 2-pin header ("P") feeds the DE0-Nano
++5V/GND from the backplane — needs a low-ESR bulk cap there too.
+
+### DE0-Nano mechanical (from `docs/de0-nano_notes.md`)
+
+Board size **49 x 75.2mm**. No official Terasic-published dimensioned
+drawing exists (per the user's research) — these figures come from
+community CAD models / the GrabCAD listing (https://grabcad.com/library/altera-de0-nano-1)
+and standard pin pitches, not an official Terasic drawing; good enough to
+build from, but worth a sanity-check against the physical board before
+drilling final holes.
+
+- GPIO_0/GPIO_1 headers: 2x20, 2.54mm pitch both directions, on the two
+  long edges, inset ~1.64mm from the 49mm-wide edges. Header-to-header
+  spacing (innermost rows) = 40.64mm center-to-center.
+- **4x M3 mounting holes**, rectangular pattern, each inset 3.5mm from the
+  board edges on both axes → hole-to-hole spacing 68.2mm (long axis) x
+  42.0mm (short axis). In board-local coordinates (origin at a corner):
+  **(3.5, 3.5), (3.5, 71.7), (45.5, 3.5), (45.5, 71.7)** mm.
+
+### Front panel (from `docs/front-panel-notes.md`)
+
+Standard 19" rack, double-slot: **width 40mm, height 128mm** (128mm matches
+the standard 3U rack panel height). This is the overall envelope only —
+exact switch/LED/connector hole positions are **not** being engineered in
+the PCB/CAD flow; the user will hand-drill those, so this doesn't block PCB
+or schematic work.
 
 **Still placeholder**: `de0nano_cpu_card.kicad_pcb` only has a generic
 100x160mm outline rectangle — it hasn't been redrawn to the real floorplan
-in `Eurocard.md` yet (connector positions, DE0-Nano mounting holes, header
-positions). DE0-Nano mounting-hole coordinates specifically still need
-pulling from Terasic's official mechanical drawing (only overall board size
-is confirmed so far, not hole positions).
+in `Eurocard.md` + the mounting-hole coordinates above yet.
 
 ## 8. Signal integrity
 
@@ -258,7 +284,7 @@ impossible in FPGA fabric, pin-boundary tri-states are normal.
 |---|---|---|---|---|
 | Level shifter | Texas Instruments SN74LVC8T245PWR | TSSOP-24 | **6** | 4 for backplane bus, 2 for future-expansion header; ~$0.35 ea; 100nF ceramic decoupling on both VCCA and VCCB per chip |
 | UART/USB/WiFi bridge | Raspberry Pi Pico-W module | module-on-headers | 1 | hand-placed, not a JLCPCB SMT part; own on-board micro-USB used directly; needs antenna copper keepout + low-ESR bulk cap on VSYS |
-| RS232 transceiver | MAX3232EIDR (SOIC-16) or MAX3232IPW (TSSOP-16) | — | 1 | **not yet chosen between the two**; either way, 4x 0.1uF ceramic |
+| RS232 transceiver | **MAX3232EIDR**, SOIC-16 | SOIC-16 | 1 | chosen over MAX3232IPW (TSSOP-16) for easier hand-handling; 4x 0.1uF ceramic |
 | RS232 connector | DB9 (DE-9), 90°, PCB-mount | THT | 1 | pin2=RXD, pin3=TXD, pin5=GND |
 | USB connector | — none — | — | 0 | Pico-W's own micro-USB used via cable |
 | Backplane connector | **Amphenol 101-A-10119-X** (DIN41617, 31p, male, angled, 2.5mm pitch) | THT | 1 | manual placement at JLCPCB (extra cost/lead time); custom KiCad footprint needed |
@@ -270,8 +296,13 @@ impossible in FPGA fabric, pin-boundary tri-states are normal.
 | Future-expansion header | 2x11 (or 2x12) pin header | THT | 1 | 11 level-shifted CDP1802 control signals + 11 GND |
 | Pull-up resistors, 10k | — | 0805/0603 | ~18 | backplane: D0-D7, LC, nEF1-3, nINT (9); control header inputs: nEF[3], nCLEAR, nWAIT, nDMA_OUT, nDMA_IN, EX_IN[0:1] (7); front panel switches/buttons (6) — tally precisely once schematics are wired |
 | Misc caps | 100nF ceramic (decoupling), 0.1uF (MAX3232 charge pump), 100pF (nINT filter), low-ESR bulk x2 (DE0-Nano feed, Pico-W VSYS) | 0603/0805 | — | |
+| Schottky diode | 1N5817 (or equivalent) | SMA/DO-214AC or THT | 1 | anode on board +5V, cathode on Pico-W VSYS (pin 39) — back-feed protection |
 
-## Open questions (down to mechanical/sourcing only)
+## Open questions
+
+**All architecture and mechanical/sourcing questions are now resolved.**
+What's left is execution (schematic capture, footprints, PCB layout), not
+open decisions:
 
 1. ~~DIN41617 backplane pinout~~ **RESOLVED**.
 2. ~~DE0-Nano header / CDP1802 pin mapping~~ **RESOLVED** — `cs1800.qsf` is
@@ -279,35 +310,33 @@ impossible in FPGA fabric, pin-boundary tri-states are normal.
 3. ~~Front-panel mounting style~~ **RESOLVED**.
 4. ~~USB connector~~ **RESOLVED** — Pico-W's own micro-USB.
 5. ~~FT2232H~~ **MOOT** — replaced by Pico-W.
-6. **DE0-Nano mounting hole coordinates** — only overall board size
-   (49x75.2mm) is confirmed; still need the 4x 3mm hole positions from
-   Terasic's mechanical drawing.
-7. **Front panel metal width in HP/mm** — the "double slot" dimension for
-   ordering the actual aluminum front panel (e.g. Schaeffer/
-   Frontplattenexpress) — separate from the PCB outline, not pinned down
-   numerically yet.
-8. **MAX3232 variant** — `MAX3232EIDR` vs `MAX3232IPW`, pick one.
-9. **Pico-W VSYS back-feed protection** — confirm whether the module's own
-   on-board protection is sufficient or this board needs to add something,
-   when drawing `sheets/power.kicad_sch`.
-10. Redraw `de0nano_cpu_card.kicad_pcb`'s outline to the real floorplan
-    (currently a generic placeholder rectangle).
-11. Build the custom DIN41617 KiCad footprint (dimensions are now fully
-    known, see §1) and the DE0-Nano GPIO header footprints, into
-    `libraries/footprints/cs1800.pretty/`.
+6. ~~DE0-Nano mounting hole coordinates~~ **RESOLVED** — see §7
+   (community-sourced, not an official Terasic drawing; worth a
+   sanity-check against the physical board before drilling final holes).
+7. ~~Front panel envelope~~ **RESOLVED** — 40 x 128mm overall; exact
+   hole positions are the user's hand-drilling job, not part of this CAD
+   flow.
+8. ~~MAX3232 variant~~ **RESOLVED** — `MAX3232EIDR`.
+9. ~~Pico-W VSYS back-feed protection~~ **RESOLVED** — 1N5817 Schottky
+   diode, board-5V → VSYS.
 
 ## Next steps
 
 1. Wire up `sheets/backplane_connector.kicad_sch`, `sheets/level_shifters.kicad_sch`,
-   and `sheets/fpga_header.kicad_sch` with the real nets from §1-§3 — all the
-   data needed for this is now available.
-2. Wire up `sheets/pico_w_bridge.kicad_sch` and `sheets/rs232.kicad_sch` (§4-§5).
-3. Wire up `sheets/power.kicad_sch` (backplane 5V feed, Pico-W VSYS
-   protection question, DE0-Nano bulk cap) and `sheets/frontpanel_io.kicad_sch` (§6).
-4. Build the custom DIN41617 footprint + any other missing footprints.
-5. Redraw the PCB outline/floorplan to match `Eurocard.md`, place parts,
-   route.
+   and `sheets/fpga_header.kicad_sch` with the real nets from §1-§3.
+2. Wire up `sheets/pico_w_bridge.kicad_sch` (incl. the Schottky diode on
+   VSYS) and `sheets/rs232.kicad_sch` (§4-§5).
+3. Wire up `sheets/power.kicad_sch` (backplane 5V feed, DE0-Nano bulk cap)
+   and `sheets/frontpanel_io.kicad_sch` (§6).
+4. Build the custom DIN41617 footprint (dims in §1) and any other missing
+   footprints, into `libraries/footprints/cs1800.pretty/`.
+5. Redraw the PCB outline to the real 100x160mm floorplan from
+   `Eurocard.md`: place the DE0-Nano mounting holes at the coordinates in
+   §7, lay out the two 40-pin headers, the DIN41617 connector, the 6 level
+   shifters, the Pico-W header, MAX3232, DB9, and the 2-pin DE0-Nano power
+   feed, then route.
 6. `kicad-cli10 sch export bom` / JLCPCB BOM+CPL export once parts are
    placed; check every part against current JLCPCB/LCSC stock before
-   ordering, especially the MAX3232 variant and the DIN41617 connector
-   (THT, manual-assembly item).
+   ordering (MAX3232EIDR, the DIN41617 connector as a THT manual-assembly
+   item, SN74LVC8T245PWR x6, Pico-W module sourced/placed separately since
+   it's not a JLCPCB SMT part).

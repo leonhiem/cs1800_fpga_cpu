@@ -93,8 +93,10 @@ This FT2232H idea will be replaced by a Raspberry Pi Pico-W module:
   * pin 2 = "UART0_TXD" 
 - UART1 (pin 6=TX and 7=RX) connect to the MAX3232 on the board
 - pins 3, 8, 13, 18, 23, 28, 33, 38 = GND
-- pin 39 is VSYS, connect to +5V onboard
-  (protection against backpowering the rack via the USB)
+- pin 39 is VSYS, we should use this line to power the Pico, to protect against USB backfeeding.
+  Furthermore, we should also protect the local +5V powersupply, in case we feed in more than 5V via USB.
+  So additionally, we should add a schottky diode (like 1N5817). (Place the anode on your external 5V supply line,
+  Place the cathode on the VSYS pin.) 
 - Pico GPIOs for future ideas, connect to DE0-nano:
   * pin 19 = "PICO[0]"
   * pin 20 = "PICO[1]"
@@ -131,3 +133,4 @@ MAX3232
 
 I found 2 available models at LCSC or JLCPCB:
 MAX3232EIDR and MAX3232IPW
+Choosing the MAX3232EIDR (SOIC-16) because it is easier to handle
