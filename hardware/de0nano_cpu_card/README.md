@@ -22,14 +22,15 @@ extraction needed):
 ~/bin/kicad-cli10 pcb drc de0nano_cpu_card.kicad_pcb
 ```
 
-## Status
+## Status (2026-10-09)
 
-Project skeleton only — see `docs/design_notes.md` for the full architecture writeup,
-the JLCPCB-oriented component shortlist, and the **open questions list** that's currently
-blocking real schematic capture (backplane pinout, DE0-Nano header/1802 pin mapping, exact
-Eurocard "double slot" dimensions, front-panel mounting style, USB connector/FT2232H
-variant choice). Two fill-in templates are provided for the two pinouts:
-`docs/pinout_backplane_TEMPLATE.md` and `docs/pinout_de0nano_header_TEMPLATE.md`.
+Architecture, mechanical/sourcing, and FPGA pin assignment are all resolved. All 7
+schematic sheets are wired with real nets (`kicad-cli sch erc`: 0 errors) — see
+`docs/design_notes.md` for the full writeup, the JLCPCB-oriented component shortlist,
+and the "Next steps" list (custom footprints, PCB floorplan/routing are what's left).
+The sheets were generated via the scripts in `tools/` (see `tools/README.md`) from the
+pin data in `docs/cs1800.qsf` and the other `docs/` files — re-run the relevant
+`tools/build_*.py` after a pinout change rather than hand-editing the `.kicad_sch` output.
 
 ## Layout
 
@@ -38,6 +39,7 @@ de0nano_cpu_card.kicad_pro/.kicad_sch/.kicad_pcb   top-level project + root (hie
 sheets/                                             one schematic per functional block
 libraries/symbols/cs1800.kicad_sym                  project-local custom symbols
 libraries/footprints/cs1800.pretty/                 project-local custom footprints
-docs/                                                design notes, pinout templates
+docs/                                                design notes, pinout docs, FPGA .qsf, connector datasheet
+tools/                                               schematic generator scripts (see tools/README.md)
 jlcpcb/                                              (empty for now) gerbers/BOM/CPL export target once ready
 ```

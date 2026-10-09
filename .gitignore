@@ -23,3 +23,5 @@ jlcpcb/*.zip
 jlcpcb/gerbers/
 *-erc.rpt
 *-drc.rpt
+__pycache__/
+*.pyc

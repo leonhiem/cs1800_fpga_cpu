@@ -7,11 +7,21 @@ is the synthesis of them, kept in sync as they change.*
 
 ## Status (2026-10-09)
 
-**Architecture and mechanical/sourcing are now fully resolved.** The FPGA
-pin assignment (`cs1800.qsf`) is the source of truth for every signal name
-and pin location below. Nothing left in "Open questions" — what remains is
-pure execution: wire the schematic sheets (still placeholders), build the
-custom footprints, redraw the PCB to the real floorplan, route.
+**Architecture and mechanical/sourcing are fully resolved, and all 7
+schematic sheets are now wired for real** (generated via the scripts in
+`tools/`, see `tools/README.md`). Whole-hierarchy `kicad-cli sch erc` passes
+with **0 errors**, 3 known/benign warnings:
+- `footprint_link_issues` on the DIN41617 connector — its custom footprint
+  hasn't been drawn yet (see §1/§7, Next steps #1).
+- `lib_symbol_mismatch` x2 (`RaspberryPi_Pico_W`, `MAX3232`) — cosmetic only:
+  kicad-cli compares the generator's flattened symbol cache against the live
+  library and sees a structural (not electrical) difference. Opening the
+  project in the real GUI will likely offer "update symbol from library",
+  safe to accept.
+
+`kicad-cli pcb drc` on the still-placeholder PCB outline: 0 violations.
+What remains is PCB-side work: the custom DIN41617 footprint, redrawing the
+board outline to the real floorplan, placement, and routing.
 
 ## Purpose
 
@@ -40,8 +50,9 @@ de0nano_cpu_card.kicad_sch (root)
                                             USB-C connector, DB9 connector (all panel-mount)
 ```
 
-Sheet contents are still placeholder/empty — pin data below is ready to wire
-in, that's the next step (see "Next steps").
+All 7 sheets are now wired with real nets/components (2026-10-09), generated
+from the pin data below via `tools/` — `sch erc` is clean. Custom footprints
+and PCB layout are the remaining work (see "Next steps").
 
 ## 1. The backplane connector
 
@@ -322,20 +333,18 @@ open decisions:
 
 ## Next steps
 
-1. Wire up `sheets/backplane_connector.kicad_sch`, `sheets/level_shifters.kicad_sch`,
-   and `sheets/fpga_header.kicad_sch` with the real nets from §1-§3.
-2. Wire up `sheets/pico_w_bridge.kicad_sch` (incl. the Schottky diode on
-   VSYS) and `sheets/rs232.kicad_sch` (§4-§5).
-3. Wire up `sheets/power.kicad_sch` (backplane 5V feed, DE0-Nano bulk cap)
-   and `sheets/frontpanel_io.kicad_sch` (§6).
-4. Build the custom DIN41617 footprint (dims in §1) and any other missing
+1. ~~Wire up all 7 schematic sheets~~ **DONE (2026-10-09)** — all real nets
+   from §1-§6 are in, `sch erc` is clean (0 errors). See `tools/README.md`
+   for how they were generated and how to regenerate a sheet after a pinout
+   change.
+2. Build the custom DIN41617 footprint (dims in §1) and any other missing
    footprints, into `libraries/footprints/cs1800.pretty/`.
-5. Redraw the PCB outline to the real 100x160mm floorplan from
+3. Redraw the PCB outline to the real 100x160mm floorplan from
    `Eurocard.md`: place the DE0-Nano mounting holes at the coordinates in
    §7, lay out the two 40-pin headers, the DIN41617 connector, the 6 level
-   shifters, the Pico-W header, MAX3232, DB9, and the 2-pin DE0-Nano power
-   feed, then route.
-6. `kicad-cli10 sch export bom` / JLCPCB BOM+CPL export once parts are
+   shifters (+ the 2x11 future-expansion header), the Pico-W header,
+   MAX3232, DB9, and the 2-pin DE0-Nano power feed, then route.
+4. `kicad-cli10 sch export bom` / JLCPCB BOM+CPL export once parts are
    placed; check every part against current JLCPCB/LCSC stock before
    ordering (MAX3232EIDR, the DIN41617 connector as a THT manual-assembly
    item, SN74LVC8T245PWR x6, Pico-W module sourced/placed separately since
