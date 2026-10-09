@@ -26,9 +26,14 @@ practice and what's left for the user's own placement/routing pass. Same
 "don't just re-run after the user has started their own work" caveat as
 `build_*.py` on the schematic side applies here too.
 
-`gen_de0nano_reference_fp.py` and `gen_din41617_fp.py` build the two
-project-local custom footprints (`libraries/footprints/cs1800.pretty/`) --
-see their own docstrings.
+`gen_de0nano_reference_fp.py`, `gen_din41617_fp.py`, and
+`gen_mounting_hole_fp.py` build the project-local custom footprints
+(`libraries/footprints/cs1800.pretty/`) -- see their own docstrings.
+`gen_mounting_hole_fp.py`'s plain NPTH footprint is also the pattern to
+follow for any other board-level mechanical feature that isn't a real
+schematic component (instantiate it directly in `build_pcb.py` via
+`render_footprint_instance(...)` + `instances.append(...)`, same as the
+DE0-Nano reference and the 2 front-panel mounting holes).
 
 ## Why this exists
 

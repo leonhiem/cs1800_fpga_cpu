@@ -379,6 +379,18 @@ placeholder, now correctly on the *other* end. Verified with another
 fall strictly inside the outline. `pcb drc`: still 0 shorts, 309
 unrouted, 73 cosmetic warnings.
 
+**2026-10-09 (later still): 2 front-panel mounting holes added.** Plain
+NPTH, 2.8mm drill, no copper -- new generic footprint
+`cs1800:MountingHole_2.8mm` (`tools/gen_mounting_hole_fp.py`, not tied to
+any connector/part). Placed on the board's left edge (X=0, where the
+front panel is) at (3.6, 5.5) and (3.6, 94.5) mm -- 3.6mm from the left
+board edge, 5.5mm from the top/bottom board edge, 89mm apart (checks out:
+100 - 2*5.5 = 89), per the user's own panel measurements. Instantiated
+directly in `build_pcb.py` (not part of the schematic/netlist, same
+pattern as the DE0-Nano mechanical reference). `pcb drc`: still 0 shorts,
+309 unrouted, 73 cosmetic warnings -- unlike J1's mounting holes, these
+land fully on-board with margin, no edge-overhang nit.
+
 The DE0-Nano reference footprint (`cs1800:DE0Nano_Reference_Outline`) is
 mechanical-only (NPTH mounting holes, no copper pads), so it can't
 electrically short against anything and wasn't given its own reserved

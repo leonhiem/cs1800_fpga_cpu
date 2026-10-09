@@ -63,6 +63,15 @@ grid(["R_D1", "R_D2", "R_D3", "R_D4"], 14, 5, 1, 0, 7)
 grid(["SW1", "SW2", "SW3", "SW4", "SW5", "SW6"], 7, 38, 1, 0, 7)
 grid(["R_SW1", "R_SW2", "R_SW3", "R_SW4", "R_SW5", "R_SW6"], 14, 38, 1, 0, 7)
 
+# Front-panel mounting holes, board's left edge (X=0). Per the user's
+# datasheet/panel measurements, 2026-10-09: 3.6mm from the left board edge,
+# 5.5mm from the top/bottom board edge, 89mm apart (= 100 - 2*5.5, matches).
+mounthole_fp = load_footprint("cs1800:MountingHole_2.8mm")
+fp_mh_top = render_footprint_instance("MH1", "Front panel mounting hole", mounthole_fp, 3.6, 5.5, 0, {}, nt)
+fp_mh_bot = render_footprint_instance("MH2", "Front panel mounting hole", mounthole_fp, 3.6, 94.5, 0, {}, nt)
+instances.append(fp_mh_top)
+instances.append(fp_mh_bot)
+
 # RS232: MAX3232 + caps + DB9 (X 23-38), own column clear of the above
 place("U7", 25, 9, 0)
 grid(["C16", "C17", "C18", "C19"], 23, 15, 2, 6, 6)
