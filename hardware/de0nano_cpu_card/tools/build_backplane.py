@@ -13,7 +13,7 @@ v5 = load("+5V.kicad_sym", "power")
 sheet = Sheet("Backplane Connector (DIN41617, 31p male)", paper="A2")
 FP_R = "Resistor_SMD:R_0603_1608Metric"
 FP_C = "Capacitor_SMD:C_0603_1608Metric"
-FP_CONN = "cs1800:DIN41617_31P_Male_Angled"  # custom footprint, TBD
+FP_CONN = "cs1800:DIN41617_31P_Male_Angled"  # see tools/gen_din41617_fp.py
 
 J1 = Component(conn31, "J1", "DIN41617_31P", FP_CONN, 60, 140, 0)
 
