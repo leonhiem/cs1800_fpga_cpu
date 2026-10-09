@@ -311,7 +311,7 @@ on the right), but genuinely **rough**: `pcb drc` on the result shows
   "is this safe to open and place", and it's clean.
 - **309 unrouted connections** (`unconnected_items`) — expected, nothing
   has been routed yet.
-- **77 cosmetic/mechanical placement warnings** (silkscreen overlaps,
+- **73 cosmetic/mechanical placement warnings** (silkscreen overlaps,
   courtyard overlaps, a couple of board-edge/hole clearance nits) — this is
   the "not finely placed" part; resolving these is exactly the user's
   placement pass, not something to chase further here. One specific one
@@ -319,6 +319,26 @@ on the right), but genuinely **rough**: `pcb drc` on the result shows
   has one pad slightly over the top board edge — trivial to nudge once
   placing it for real; hand-computing its exact rotated span wasn't worth
   the iteration time versus just doing it in the GUI.
+
+**2026-10-09 (later): J1 pin order + zigzag corrected.** The user caught
+two mistakes in the `cs1800:DIN41617_31P_Male_Angled` footprint from a
+visual GUI inspection against the datasheet's PCB-hole-pattern drawing
+(`docs/conec_connectors_din_41617-3009425.pdf`):
+- Pin 1 was at the board's bottom-right instead of top-right (pin 31 was
+  top instead of bottom) — the footprint's local pin-numbering direction
+  was reversed relative to what J1's 90° placement rotation needed.
+- All 31 pads were on one straight line; the real part's PCB-hole pattern
+  is a **zigzag**: odd pins sit one row, even pins a second row offset
+  2.54mm "inward" (toward the board's interior / away from the connector's
+  board edge).
+Both fixed in `tools/gen_din41617_fp.py` (regenerate with
+`python3 gen_din41617_fp.py`, then `python3 build_pcb.py`). The fix was
+verified with `kicad-cli pcb render` (cropped renders of the J1 corner),
+not just reasoned about by hand, since J1's rotation makes the local→board
+coordinate mapping non-obvious — see the comments in
+`gen_din41617_fp.py` for the verified odd/even → y-offset sign.
+`pcb drc` after the fix: still 0 electrical shorts, 309 unrouted
+(unchanged), cosmetic warnings now 73 (down from 77).
 
 The DE0-Nano reference footprint (`cs1800:DE0Nano_Reference_Outline`) is
 mechanical-only (NPTH mounting holes, no copper pads), so it can't

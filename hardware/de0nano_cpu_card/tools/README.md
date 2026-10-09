@@ -172,6 +172,15 @@ of `share/kicad/symbols/<Library>.kicad_symdir/`) and add a `load(...)` call.
   was authored with its pin row along X) — check each footprint's actual
   pad coordinate spread (`grep` the `.kicad_mod` for `(at ...)` on its
   pads) before deciding a placement's rotation, rather than assuming.
+- A footprint placed with a non-zero rotation (e.g. J1/DIN41617 at 90°) --
+  don't try to reason out by hand which local-frame direction ends up where
+  on the board; KiCad's rotation-angle sign convention combined with the
+  Y-down board frame is easy to get backwards (as happened for J1's pin 1
+  and its zigzag offset direction, 2026-10-09). Instead render and check:
+  `kicad-cli10 pcb render --side top -o /tmp/x.png board.kicad_pcb`, then
+  crop the region of interest (`PIL`/`Image.crop`) and view it with the
+  Read tool. Cheaper than iterating blind against `pcb drc` (which doesn't
+  catch orientation mistakes at all -- only real electrical shorts).
 - `build_pcb.py`'s component footprint has **no reserved clear X-band** of
   its own — it's mechanical/NPTH-only (no copper), so it cannot DRC-short
   against anything and was deliberately left to cosmetically overlap small

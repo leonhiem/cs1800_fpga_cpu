@@ -4,8 +4,19 @@ DRILL = 1.1
 PAD = 2.0
 MOUNT_DRILL = 2.8
 MOUNT_INSET = 5.0   # beyond pin1/pin31, same axis
+ZIGZAG = 2.54       # odd pins at local y=0 ("close to PCB edge" once placed),
+                     # even pins 2.54mm further in y ("inward") -- per the
+                     # datasheet's PCB-hole-pattern drawing (zigzag row, not
+                     # a single straight row) and confirmed against the
+                     # physical part by the user, 2026-10-09.
 
-# Pin 1 at x=0, increasing to pin31 at x=(N-1)*PITCH
+# Local frame: pin 1 at the HIGH-x end, decreasing to pin 31 at x=0. This is
+# reversed from a naive "pin1 at x=0" layout on purpose -- J1 is placed
+# rotated 90 deg (see build_pcb.py), and with pin1-at-x=0 the rotation put
+# pin 1 at the board's bottom and pin 31 at the top, backwards from the
+# required pin1-top / pin31-bottom orientation. Flipping which end pin 1
+# sits at flips the rotated result without having to reason about KiCad's
+# rotation-angle sign convention.
 span = (N_PINS - 1) * PITCH   # 75.0
 mount_left = -MOUNT_INSET
 mount_right = span + MOUNT_INSET
@@ -66,16 +77,17 @@ out.append(f'''\t(fp_rect
 \t\t(layer "F.CrtYd")
 \t)''')
 
-# Pin-1 arrow marker on silkscreen, just outside the body near pin1
+# Pin-1 arrow marker on silkscreen, just outside the body near pin1 (now at
+# local x = span, the high-x end -- see the local-frame note above)
 out.append(f'''\t(fp_line
-\t\t(start -2 {body_y0 - 0.6})
-\t\t(end 0 {body_y0 - 0.6 - 1.5})
+\t\t(start {span - 2} {body_y0 - 0.6})
+\t\t(end {span} {body_y0 - 0.6 - 1.5})
 \t\t(stroke (width 0.12) (type solid))
 \t\t(layer "F.SilkS")
 \t)
 \t(fp_line
-\t\t(start 2 {body_y0 - 0.6})
-\t\t(end 0 {body_y0 - 0.6 - 1.5})
+\t\t(start {span + 2} {body_y0 - 0.6})
+\t\t(end {span} {body_y0 - 0.6 - 1.5})
 \t\t(stroke (width 0.12) (type solid))
 \t\t(layer "F.SilkS")
 \t)''')
@@ -89,12 +101,19 @@ for x in (mount_left, mount_right):
 \t\t(layers "*.Cu" "*.Mask")
 \t)''')
 
-# Signal pads, pin1 = roundrect (polarity marker), rest circular
+# Signal pads, pin1 = roundrect (polarity marker), rest circular.
+# x: pin1 at the high-x end, decreasing toward pin31 at x=0 (see note above).
+# y: zigzag -- odd pins at y=ZIGZAG, even pins at y=0. Empirically verified
+# (via `kicad-cli pcb render`, since J1's rotation makes this hard to reason
+# about by hand) that THIS sign -- not the naive "odd=0, even=ZIGZAG" -- is
+# the one that lands odd pins closer to the board edge once J1 is placed
+# rotated 90 deg (see build_pcb.py).
 for n in range(1, N_PINS + 1):
-    x = (n - 1) * PITCH
+    x = (N_PINS - n) * PITCH
+    y = ZIGZAG if (n % 2 == 1) else 0
     if n == 1:
         out.append(f'''\t(pad "{n}" thru_hole roundrect
-\t\t(at {x} 0)
+\t\t(at {x} {y})
 \t\t(size {PAD} {PAD})
 \t\t(drill {DRILL})
 \t\t(layers "*.Cu" "*.Mask")
@@ -103,7 +122,7 @@ for n in range(1, N_PINS + 1):
 \t)''')
     else:
         out.append(f'''\t(pad "{n}" thru_hole circle
-\t\t(at {x} 0)
+\t\t(at {x} {y})
 \t\t(size {PAD} {PAD})
 \t\t(drill {DRILL})
 \t\t(layers "*.Cu" "*.Mask")
