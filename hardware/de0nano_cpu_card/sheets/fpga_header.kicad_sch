@@ -4156,7 +4156,7 @@
 		(in_pos_files yes)
 		(dnp no)
 		(uuid "388a430a-2901-4426-a4e4-0c9914e435f3")
-		(property "Reference" "#PWR"
+		(property "Reference" "#PWR0152"
 			(at 259.08 62.23 0)
 			(hide yes)
 			(show_name no)
@@ -4213,7 +4213,7 @@
 		(instances
 			(project "de0nano_cpu_card"
 				(path "/0daab69e-2257-45dd-abd7-efbe947cce3e/a56ed679-b35c-49f9-890d-ca9b02a60560"
-					(reference "#PWR")
+					(reference "#PWR0152")
 					(unit 1)
 				)
 			)
@@ -4230,7 +4230,7 @@
 		(in_pos_files yes)
 		(dnp no)
 		(uuid "4188fb14-0b01-4764-a674-5297f771ef1f")
-		(property "Reference" "#PWR"
+		(property "Reference" "#PWR0150"
 			(at 77.47 39.37 0)
 			(hide yes)
 			(show_name no)
@@ -4287,7 +4287,7 @@
 		(instances
 			(project "de0nano_cpu_card"
 				(path "/0daab69e-2257-45dd-abd7-efbe947cce3e/a56ed679-b35c-49f9-890d-ca9b02a60560"
-					(reference "#PWR")
+					(reference "#PWR0150")
 					(unit 1)
 				)
 			)
@@ -4304,7 +4304,7 @@
 		(in_pos_files yes)
 		(dnp no)
 		(uuid "6f4c8ee9-39be-4f51-83e8-630ba9889fa4")
-		(property "Reference" "#PWR"
+		(property "Reference" "#PWR0148"
 			(at 17.78 62.23 0)
 			(hide yes)
 			(show_name no)
@@ -4361,7 +4361,7 @@
 		(instances
 			(project "de0nano_cpu_card"
 				(path "/0daab69e-2257-45dd-abd7-efbe947cce3e/a56ed679-b35c-49f9-890d-ca9b02a60560"
-					(reference "#PWR")
+					(reference "#PWR0148")
 					(unit 1)
 				)
 			)
@@ -4914,7 +4914,7 @@
 		(in_pos_files yes)
 		(dnp no)
 		(uuid "bab3e0f8-c49c-4ceb-bf63-4317e0f0e8d5")
-		(property "Reference" "#PWR"
+		(property "Reference" "#PWR0151"
 			(at 250.19 40.64 0)
 			(hide yes)
 			(show_name no)
@@ -4971,7 +4971,7 @@
 		(instances
 			(project "de0nano_cpu_card"
 				(path "/0daab69e-2257-45dd-abd7-efbe947cce3e/a56ed679-b35c-49f9-890d-ca9b02a60560"
-					(reference "#PWR")
+					(reference "#PWR0151")
 					(unit 1)
 				)
 			)
@@ -5065,7 +5065,7 @@
 		(in_pos_files yes)
 		(dnp no)
 		(uuid "c9193ae6-a6e6-40d7-bd58-2da3bd2796df")
-		(property "Reference" "#PWR"
+		(property "Reference" "#PWR0149"
 			(at 73.66 62.23 0)
 			(hide yes)
 			(show_name no)
@@ -5122,7 +5122,7 @@
 		(instances
 			(project "de0nano_cpu_card"
 				(path "/0daab69e-2257-45dd-abd7-efbe947cce3e/a56ed679-b35c-49f9-890d-ca9b02a60560"
-					(reference "#PWR")
+					(reference "#PWR0149")
 					(unit 1)
 				)
 			)

@@ -578,121 +578,6 @@
 			)
 			(embedded_fonts no)
 		)
-		(symbol "power:PWR_FLAG"
-			(power global)
-			(pin_numbers
-				(hide yes)
-			)
-			(pin_names
-				(offset 0)
-				(hide yes)
-			)
-			(exclude_from_sim no)
-			(in_bom yes)
-			(on_board yes)
-			(in_pos_files yes)
-			(duplicate_pin_numbers_are_jumpers no)
-			(property "Reference" "#FLG"
-				(at 0 1.905 0)
-				(show_name no)
-				(do_not_autoplace no)
-				(hide yes)
-				(effects
-					(font
-						(size 1.27 1.27)
-					)
-				)
-			)
-			(property "Value" "PWR_FLAG"
-				(at 0 3.81 0)
-				(show_name no)
-				(do_not_autoplace no)
-				(effects
-					(font
-						(size 1.27 1.27)
-					)
-				)
-			)
-			(property "Footprint" ""
-				(at 0 0 0)
-				(show_name no)
-				(do_not_autoplace no)
-				(hide yes)
-				(effects
-					(font
-						(size 1.27 1.27)
-					)
-				)
-			)
-			(property "Datasheet" ""
-				(at 0 0 0)
-				(show_name no)
-				(do_not_autoplace no)
-				(hide yes)
-				(effects
-					(font
-						(size 1.27 1.27)
-					)
-				)
-			)
-			(property "Description" "Special symbol for telling ERC where power comes from"
-				(at 0 0 0)
-				(show_name no)
-				(do_not_autoplace no)
-				(hide yes)
-				(effects
-					(font
-						(size 1.27 1.27)
-					)
-				)
-			)
-			(property "ki_keywords" "flag power"
-				(at 0 0 0)
-				(show_name no)
-				(do_not_autoplace no)
-				(hide yes)
-				(effects
-					(font
-						(size 1.27 1.27)
-					)
-				)
-			)
-			(symbol "PWR_FLAG_0_0"
-				(pin power_out line
-					(at 0 0 90)
-					(length 0)
-					(name ""
-						(effects
-							(font
-								(size 1.27 1.27)
-							)
-						)
-					)
-					(number "1"
-						(effects
-							(font
-								(size 1.27 1.27)
-							)
-						)
-					)
-				)
-			)
-			(symbol "PWR_FLAG_0_1"
-				(polyline
-					(pts
-						(xy 0 0) (xy 0 1.27) (xy -1.016 1.905) (xy 0 2.54) (xy 1.016 1.905) (xy 0 1.27)
-					)
-					(stroke
-						(width 0)
-						(type default)
-					)
-					(fill
-						(type none)
-					)
-				)
-			)
-			(embedded_fonts no)
-		)
 	)
 	(wire
 		(pts
@@ -857,7 +742,7 @@
 		(in_pos_files yes)
 		(dnp no)
 		(uuid "04e37e23-0184-48fc-91cb-b3117fda9e57")
-		(property "Reference" "#PWR"
+		(property "Reference" "#PWR020"
 			(at 31.75 39.37 0)
 			(hide yes)
 			(show_name no)
@@ -914,81 +799,7 @@
 		(instances
 			(project "de0nano_cpu_card"
 				(path "/0daab69e-2257-45dd-abd7-efbe947cce3e/8b002943-6b27-46a8-b3d0-f29a8b6e36ed"
-					(reference "#PWR")
-					(unit 1)
-				)
-			)
-		)
-	)
-	(symbol
-		(lib_id "power:PWR_FLAG")
-		(at 129.54 39.37 0)
-		(unit 1)
-		(body_style 1)
-		(exclude_from_sim no)
-		(in_bom yes)
-		(on_board yes)
-		(in_pos_files yes)
-		(dnp no)
-		(uuid "075ca4c5-8014-420f-99fd-b4e03edf4be4")
-		(property "Reference" "PF2"
-			(at 129.54 33.37 0)
-			(show_name no)
-			(do_not_autoplace no)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "Value" "PWR_FLAG"
-			(at 129.54 35.37 0)
-			(show_name no)
-			(do_not_autoplace no)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "Footprint" ""
-			(at 129.54 39.37 0)
-			(hide yes)
-			(show_name no)
-			(do_not_autoplace no)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "Datasheet" ""
-			(at 129.54 39.37 0)
-			(show_name no)
-			(do_not_autoplace no)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "Description" ""
-			(at 129.54 39.37 0)
-			(show_name no)
-			(do_not_autoplace no)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(pin "1"
-			(uuid "284e6934-45ae-4018-bf93-4ffd2893fc61")
-		)
-		(instances
-			(project "de0nano_cpu_card"
-				(path "/0daab69e-2257-45dd-abd7-efbe947cce3e/8b002943-6b27-46a8-b3d0-f29a8b6e36ed"
-					(reference "PF2")
+					(reference "#PWR020")
 					(unit 1)
 				)
 			)
@@ -1005,7 +816,7 @@
 		(in_pos_files yes)
 		(dnp no)
 		(uuid "419a8dfb-331b-49e5-9d2b-08d1cc68b0ca")
-		(property "Reference" "#PWR"
+		(property "Reference" "#PWR021"
 			(at 31.75 45.72 0)
 			(hide yes)
 			(show_name no)
@@ -1062,7 +873,7 @@
 		(instances
 			(project "de0nano_cpu_card"
 				(path "/0daab69e-2257-45dd-abd7-efbe947cce3e/8b002943-6b27-46a8-b3d0-f29a8b6e36ed"
-					(reference "#PWR")
+					(reference "#PWR021")
 					(unit 1)
 				)
 			)
@@ -1223,80 +1034,6 @@
 		)
 	)
 	(symbol
-		(lib_id "power:PWR_FLAG")
-		(at 110.49 39.37 0)
-		(unit 1)
-		(body_style 1)
-		(exclude_from_sim no)
-		(in_bom yes)
-		(on_board yes)
-		(in_pos_files yes)
-		(dnp no)
-		(uuid "930e834d-3f6c-406b-8367-5871a7611747")
-		(property "Reference" "PF1"
-			(at 110.49 33.37 0)
-			(show_name no)
-			(do_not_autoplace no)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "Value" "PWR_FLAG"
-			(at 110.49 35.37 0)
-			(show_name no)
-			(do_not_autoplace no)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "Footprint" ""
-			(at 110.49 39.37 0)
-			(hide yes)
-			(show_name no)
-			(do_not_autoplace no)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "Datasheet" ""
-			(at 110.49 39.37 0)
-			(show_name no)
-			(do_not_autoplace no)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "Description" ""
-			(at 110.49 39.37 0)
-			(show_name no)
-			(do_not_autoplace no)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(pin "1"
-			(uuid "78922264-3f0c-43d9-8942-324cc6a11d99")
-		)
-		(instances
-			(project "de0nano_cpu_card"
-				(path "/0daab69e-2257-45dd-abd7-efbe947cce3e/8b002943-6b27-46a8-b3d0-f29a8b6e36ed"
-					(reference "PF1")
-					(unit 1)
-				)
-			)
-		)
-	)
-	(symbol
 		(lib_id "power:GND")
 		(at 69.85 45.72 0)
 		(unit 1)
@@ -1307,7 +1044,7 @@
 		(in_pos_files yes)
 		(dnp no)
 		(uuid "b57e922e-d1a1-4e2d-9529-791415ace3a9")
-		(property "Reference" "#PWR"
+		(property "Reference" "#PWR023"
 			(at 69.85 45.72 0)
 			(hide yes)
 			(show_name no)
@@ -1364,7 +1101,7 @@
 		(instances
 			(project "de0nano_cpu_card"
 				(path "/0daab69e-2257-45dd-abd7-efbe947cce3e/8b002943-6b27-46a8-b3d0-f29a8b6e36ed"
-					(reference "#PWR")
+					(reference "#PWR023")
 					(unit 1)
 				)
 			)
@@ -1381,7 +1118,7 @@
 		(in_pos_files yes)
 		(dnp no)
 		(uuid "e0c658be-99c8-46cc-a573-848e7855e443")
-		(property "Reference" "#PWR"
+		(property "Reference" "#PWR022"
 			(at 69.85 33.02 0)
 			(hide yes)
 			(show_name no)
@@ -1438,7 +1175,7 @@
 		(instances
 			(project "de0nano_cpu_card"
 				(path "/0daab69e-2257-45dd-abd7-efbe947cce3e/8b002943-6b27-46a8-b3d0-f29a8b6e36ed"
-					(reference "#PWR")
+					(reference "#PWR022")
 					(unit 1)
 				)
 			)

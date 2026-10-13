@@ -2060,7 +2060,7 @@
 		(in_pos_files yes)
 		(dnp no)
 		(uuid "0276b69b-5302-4ada-9bbc-b97864589a7d")
-		(property "Reference" "#PWR"
+		(property "Reference" "#PWR038"
 			(at 172.72 121.92 0)
 			(hide yes)
 			(show_name no)
@@ -2117,7 +2117,7 @@
 		(instances
 			(project "de0nano_cpu_card"
 				(path "/0daab69e-2257-45dd-abd7-efbe947cce3e/5bdfddb1-6b11-40ff-a5b3-24c3d0c519a0"
-					(reference "#PWR")
+					(reference "#PWR038")
 					(unit 1)
 				)
 			)
@@ -2134,7 +2134,7 @@
 		(in_pos_files yes)
 		(dnp no)
 		(uuid "072de5af-f74e-4222-8237-c93e6b408d0a")
-		(property "Reference" "#PWR"
+		(property "Reference" "#PWR030"
 			(at 82.55 121.92 0)
 			(hide yes)
 			(show_name no)
@@ -2191,7 +2191,7 @@
 		(instances
 			(project "de0nano_cpu_card"
 				(path "/0daab69e-2257-45dd-abd7-efbe947cce3e/5bdfddb1-6b11-40ff-a5b3-24c3d0c519a0"
-					(reference "#PWR")
+					(reference "#PWR030")
 					(unit 1)
 				)
 			)
@@ -2208,7 +2208,7 @@
 		(in_pos_files yes)
 		(dnp no)
 		(uuid "078b173d-4f56-4e9b-8139-e0bbda9d2d54")
-		(property "Reference" "#PWR"
+		(property "Reference" "#PWR036"
 			(at 142.24 121.92 0)
 			(hide yes)
 			(show_name no)
@@ -2265,7 +2265,7 @@
 		(instances
 			(project "de0nano_cpu_card"
 				(path "/0daab69e-2257-45dd-abd7-efbe947cce3e/5bdfddb1-6b11-40ff-a5b3-24c3d0c519a0"
-					(reference "#PWR")
+					(reference "#PWR036")
 					(unit 1)
 				)
 			)
@@ -2359,7 +2359,7 @@
 		(in_pos_files yes)
 		(dnp no)
 		(uuid "14b447a2-6b15-4ec5-92b8-df704a7be408")
-		(property "Reference" "#PWR"
+		(property "Reference" "#PWR025"
 			(at 24.13 30.48 0)
 			(hide yes)
 			(show_name no)
@@ -2416,7 +2416,7 @@
 		(instances
 			(project "de0nano_cpu_card"
 				(path "/0daab69e-2257-45dd-abd7-efbe947cce3e/5bdfddb1-6b11-40ff-a5b3-24c3d0c519a0"
-					(reference "#PWR")
+					(reference "#PWR025")
 					(unit 1)
 				)
 			)
@@ -2587,7 +2587,7 @@
 		(in_pos_files yes)
 		(dnp no)
 		(uuid "3dc77abb-a262-4dd8-91b8-6e23eb0a5eab")
-		(property "Reference" "#PWR"
+		(property "Reference" "#PWR026"
 			(at 36.83 149.86 0)
 			(hide yes)
 			(show_name no)
@@ -2644,7 +2644,7 @@
 		(instances
 			(project "de0nano_cpu_card"
 				(path "/0daab69e-2257-45dd-abd7-efbe947cce3e/5bdfddb1-6b11-40ff-a5b3-24c3d0c519a0"
-					(reference "#PWR")
+					(reference "#PWR026")
 					(unit 1)
 				)
 			)
@@ -2661,7 +2661,7 @@
 		(in_pos_files yes)
 		(dnp no)
 		(uuid "45d148ff-81c2-4db0-aaf8-324cabeb5cee")
-		(property "Reference" "#PWR"
+		(property "Reference" "#PWR027"
 			(at 52.07 121.92 0)
 			(hide yes)
 			(show_name no)
@@ -2718,7 +2718,7 @@
 		(instances
 			(project "de0nano_cpu_card"
 				(path "/0daab69e-2257-45dd-abd7-efbe947cce3e/5bdfddb1-6b11-40ff-a5b3-24c3d0c519a0"
-					(reference "#PWR")
+					(reference "#PWR027")
 					(unit 1)
 				)
 			)
@@ -2889,7 +2889,7 @@
 		(in_pos_files yes)
 		(dnp no)
 		(uuid "73791e44-5d28-4b6a-a3b5-e7d3ad325d5b")
-		(property "Reference" "#PWR"
+		(property "Reference" "#PWR032"
 			(at 96.52 149.86 0)
 			(hide yes)
 			(show_name no)
@@ -2946,7 +2946,7 @@
 		(instances
 			(project "de0nano_cpu_card"
 				(path "/0daab69e-2257-45dd-abd7-efbe947cce3e/5bdfddb1-6b11-40ff-a5b3-24c3d0c519a0"
-					(reference "#PWR")
+					(reference "#PWR032")
 					(unit 1)
 				)
 			)
@@ -3425,7 +3425,7 @@
 		(in_pos_files yes)
 		(dnp no)
 		(uuid "9d57863f-cc09-4bad-908a-c2fd2f08fe0f")
-		(property "Reference" "#PWR"
+		(property "Reference" "#PWR039"
 			(at 186.69 149.86 0)
 			(hide yes)
 			(show_name no)
@@ -3482,7 +3482,7 @@
 		(instances
 			(project "de0nano_cpu_card"
 				(path "/0daab69e-2257-45dd-abd7-efbe947cce3e/5bdfddb1-6b11-40ff-a5b3-24c3d0c519a0"
-					(reference "#PWR")
+					(reference "#PWR039")
 					(unit 1)
 				)
 			)
@@ -3499,7 +3499,7 @@
 		(in_pos_files yes)
 		(dnp no)
 		(uuid "a4c01ffe-79a1-470f-9a48-e5603a27db1f")
-		(property "Reference" "#PWR"
+		(property "Reference" "#PWR024"
 			(at 22.86 121.92 0)
 			(hide yes)
 			(show_name no)
@@ -3556,7 +3556,7 @@
 		(instances
 			(project "de0nano_cpu_card"
 				(path "/0daab69e-2257-45dd-abd7-efbe947cce3e/5bdfddb1-6b11-40ff-a5b3-24c3d0c519a0"
-					(reference "#PWR")
+					(reference "#PWR024")
 					(unit 1)
 				)
 			)
@@ -3573,7 +3573,7 @@
 		(in_pos_files yes)
 		(dnp no)
 		(uuid "ab7745ae-52a7-465d-b5b1-2ef33f750ae6")
-		(property "Reference" "#PWR"
+		(property "Reference" "#PWR035"
 			(at 125.73 149.86 0)
 			(hide yes)
 			(show_name no)
@@ -3630,7 +3630,7 @@
 		(instances
 			(project "de0nano_cpu_card"
 				(path "/0daab69e-2257-45dd-abd7-efbe947cce3e/5bdfddb1-6b11-40ff-a5b3-24c3d0c519a0"
-					(reference "#PWR")
+					(reference "#PWR035")
 					(unit 1)
 				)
 			)
@@ -3878,7 +3878,7 @@
 		(in_pos_files yes)
 		(dnp no)
 		(uuid "c51b4290-f383-457a-98c9-6d3a1da3f96d")
-		(property "Reference" "#PWR"
+		(property "Reference" "#PWR034"
 			(at 113.03 30.48 0)
 			(hide yes)
 			(show_name no)
@@ -3935,7 +3935,7 @@
 		(instances
 			(project "de0nano_cpu_card"
 				(path "/0daab69e-2257-45dd-abd7-efbe947cce3e/5bdfddb1-6b11-40ff-a5b3-24c3d0c519a0"
-					(reference "#PWR")
+					(reference "#PWR034")
 					(unit 1)
 				)
 			)
@@ -3952,7 +3952,7 @@
 		(in_pos_files yes)
 		(dnp no)
 		(uuid "c790a18e-8437-4da1-8c7f-0d5da7d4caea")
-		(property "Reference" "#PWR"
+		(property "Reference" "#PWR033"
 			(at 111.76 121.92 0)
 			(hide yes)
 			(show_name no)
@@ -4009,7 +4009,7 @@
 		(instances
 			(project "de0nano_cpu_card"
 				(path "/0daab69e-2257-45dd-abd7-efbe947cce3e/5bdfddb1-6b11-40ff-a5b3-24c3d0c519a0"
-					(reference "#PWR")
+					(reference "#PWR033")
 					(unit 1)
 				)
 			)
@@ -4334,7 +4334,7 @@
 		(in_pos_files yes)
 		(dnp no)
 		(uuid "e665441b-c83f-41df-a500-ec7e1776a6de")
-		(property "Reference" "#PWR"
+		(property "Reference" "#PWR037"
 			(at 156.21 149.86 0)
 			(hide yes)
 			(show_name no)
@@ -4391,7 +4391,7 @@
 		(instances
 			(project "de0nano_cpu_card"
 				(path "/0daab69e-2257-45dd-abd7-efbe947cce3e/5bdfddb1-6b11-40ff-a5b3-24c3d0c519a0"
-					(reference "#PWR")
+					(reference "#PWR037")
 					(unit 1)
 				)
 			)
@@ -4485,7 +4485,7 @@
 		(in_pos_files yes)
 		(dnp no)
 		(uuid "eabf56a7-df3a-43c0-af84-8efeb7bc55cb")
-		(property "Reference" "#PWR"
+		(property "Reference" "#PWR029"
 			(at 66.04 149.86 0)
 			(hide yes)
 			(show_name no)
@@ -4542,7 +4542,7 @@
 		(instances
 			(project "de0nano_cpu_card"
 				(path "/0daab69e-2257-45dd-abd7-efbe947cce3e/5bdfddb1-6b11-40ff-a5b3-24c3d0c519a0"
-					(reference "#PWR")
+					(reference "#PWR029")
 					(unit 1)
 				)
 			)
@@ -4559,7 +4559,7 @@
 		(in_pos_files yes)
 		(dnp no)
 		(uuid "ef8ec9f1-3d20-4754-8472-de58ccd719be")
-		(property "Reference" "#PWR"
+		(property "Reference" "#PWR031"
 			(at 83.82 30.48 0)
 			(hide yes)
 			(show_name no)
@@ -4616,7 +4616,7 @@
 		(instances
 			(project "de0nano_cpu_card"
 				(path "/0daab69e-2257-45dd-abd7-efbe947cce3e/5bdfddb1-6b11-40ff-a5b3-24c3d0c519a0"
-					(reference "#PWR")
+					(reference "#PWR031")
 					(unit 1)
 				)
 			)
@@ -4633,7 +4633,7 @@
 		(in_pos_files yes)
 		(dnp no)
 		(uuid "f07ea37f-09aa-4fbf-9a71-5c2b6826d128")
-		(property "Reference" "#PWR"
+		(property "Reference" "#PWR028"
 			(at 53.34 30.48 0)
 			(hide yes)
 			(show_name no)
@@ -4690,7 +4690,7 @@
 		(instances
 			(project "de0nano_cpu_card"
 				(path "/0daab69e-2257-45dd-abd7-efbe947cce3e/5bdfddb1-6b11-40ff-a5b3-24c3d0c519a0"
-					(reference "#PWR")
+					(reference "#PWR028")
 					(unit 1)
 				)
 			)
