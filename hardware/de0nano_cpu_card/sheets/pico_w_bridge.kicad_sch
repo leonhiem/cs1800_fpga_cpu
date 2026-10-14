@@ -1625,10 +1625,6 @@
 		(uuid "dc7b280d-c969-4a0f-a35f-aef3f1a203b0")
 	)
 	(no_connect
-		(at 146.05 102.87)
-		(uuid "0324e472-c08f-48fd-9589-546d86168361")
-	)
-	(no_connect
 		(at 163.83 128.27)
 		(uuid "04c1b202-8208-483f-a8d4-cfabfbf5cfb4")
 	)
@@ -1856,6 +1852,16 @@
 	)
 	(wire
 		(pts
+			(xy 146.05 100.33) (xy 146.05 102.87)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "bad30fc0-032f-45cb-9e9e-a011ff670078")
+	)
+	(wire
+		(pts
 			(xy 97.79 153.67) (xy 118.11 153.67)
 		)
 		(stroke
@@ -1933,6 +1939,27 @@
 			(type default)
 		)
 		(uuid "fd407df8-41ee-4ae8-994a-3267f7d99b11")
+	)
+	(global_label "PICO_3V3"
+		(shape input)
+		(at 146.05 100.33 90)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+		)
+		(uuid "08f7250c-a884-4d71-96b3-dffd6ae510e7")
+		(property "Intersheetrefs" "${INTERSHEET_REFS}"
+			(at 146.05 100.33 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
 	)
 	(global_label "PICO[3]"
 		(shape input)
