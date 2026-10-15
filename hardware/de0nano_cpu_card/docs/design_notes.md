@@ -5,21 +5,26 @@
 `cs1800.qsf`, the Conec datasheet) are the user's source material — this file
 is the synthesis of them, kept in sync as they change.*
 
-## Status (2026-10-09)
+## Status (2026-10-16)
 
-**Architecture and mechanical/sourcing are fully resolved, all 7 schematic
-sheets are wired for real** (generated via the scripts in `tools/`, see
-`tools/README.md`), **and the custom DIN41617 footprint now exists**
-(`libraries/footprints/cs1800.pretty/DIN41617_31P_Male_Angled.kicad_mod`).
-Whole-hierarchy `kicad-cli sch erc` passes with **0 errors**, 2 known/benign
-cosmetic warnings (`lib_symbol_mismatch` on `RaspberryPi_Pico_W` and
-`MAX3232` — kicad-cli compares the generator's flattened symbol cache
-against the live library and sees a structural, not electrical, difference;
-the GUI will likely offer "update symbol from library", safe to accept).
+**Design is complete: schematic, footprints, PCB placement, routing, and
+ground planes/via-stitching are all done.** The 7 schematic sheets were
+originally wired via the scripts in `tools/` (see `tools/README.md`), then
+hand-edited by the user in the GUI for final placement, routing, and a
+late architecture change (level shifters 6→8, spare channels hard-tied to
+GND instead of a mixed pull-up/GND scheme — see §2). Whole-hierarchy
+`kicad-cli sch erc`: **0 errors**, remaining warnings are known/benign
+(`lib_symbol_mismatch` on `RaspberryPi_Pico_W`/`MAX3232` — cosmetic,
+kicad-cli comparing the generator's flattened symbol cache against the
+live library; `pin_to_pin` x23 — the intentional GND ties, §2;
+`isolated_pin_label` x2 — spare pull-up nets with one label instance;
+`unconnected_wire_endpoint` x2 — tiny stubs near hierarchy sheet pins,
+pre-existing). `kicad-cli pcb drc` on the finished board: **0 violations,
+0 unconnected items**.
 
-`kicad-cli pcb drc` on the still-placeholder PCB outline: 0 violations. What
-remains is PCB-side work: any other missing footprints, redrawing the board
-outline to the real floorplan, placement, and routing.
+**Current phase: Gerber/drill export and JLCPCB handover** (user doing
+this themselves) — see §10 for the BOM and "Next steps" below for the
+production checklist.
 
 ## Purpose
 
@@ -39,7 +44,7 @@ backplane doesn't carry one).
 ```
 de0nano_cpu_card.kicad_sch (root)
 ├── sheets/backplane_connector.kicad_sch   DIN41617, 31p male, 5V in + CS1800 bus signals
-├── sheets/level_shifters.kicad_sch        6x SN74LVC8T245 total (see below)
+├── sheets/level_shifters.kicad_sch        8x SN74LVC8T245 total (see below)
 ├── sheets/fpga_header.kicad_sch           2x 40-pin IDC headers (JP1/GPIO_0, JP2/GPIO_1) -> ribbon cables -> DE0-Nano
 ├── sheets/power.kicad_sch                 backplane 5V -> DE0-Nano 5V feed, local rails/decoupling
 ├── sheets/pico_w_bridge.kicad_sch         Raspberry Pi Pico-W module, 2x UART + 8x spare GPIO
@@ -91,21 +96,41 @@ drawing:
   3D model, if Amphenol publishes one) before finalizing silkscreen/courtyard
   clearances.
 
-## 2. Level shifter allocation — 6x SN74LVC8T245, not 4
+## 2. Level shifter allocation — 8x SN74LVC8T245 (was 6)
 
-**Correction from earlier notes: this is 6 chips, not 4.** 4 chips serve the
-backplane bus; **2 more** serve an 11-signal "CDP1802 control pins" header
-for future expansion (DMA, CLEAR/WAIT, chip-select, extra EF, etc.) that
-is *not* exposed on the backplane — see §4. All 6 are
+**Correction from earlier notes: originally 6 chips (4 for the backplane
+bus, 2 for the future-expansion header), not 4.** All are
 `VCCA`=3.3V (DE0-Nano side), `VCCB`=5V (backplane pin 1 / on-board 5V rail).
 
-**Decoupling (2026-10-09, found during GUI schematic review)**: each of the
-6 chips needs a 100nF ceramic cap on *both* supplies — 12 caps total
-(`level_shifters.kicad_sch`, C1-C12). Schematically placed near each IC for
-readability, but the requirement that actually matters is a **PCB-layout**
-one: each cap needs to sit physically close to its IC's VCCA/VCCB pin when
-placing parts — the schematic placement doesn't guarantee that, it's a
-placement-phase TODO (see "Next steps").
+**Decoupling (2026-10-09, found during GUI schematic review)**: each chip
+needs a 100nF ceramic cap on *both* supplies. Schematically placed near each
+IC for readability, but the requirement that actually matters is a
+**PCB-layout** one: each cap needs to sit physically close to its IC's
+VCCA/VCCB pin when placing parts — the schematic placement doesn't guarantee
+that, it was a placement-phase TODO, since resolved (see §7a).
+
+**2026-10-16 (post-placement/routing schematic edit, user's own change):**
+count increased to **8x SN74LVC8T245** (added U8, U9, both backplane-facing
+— confirmed from the netlist: U1/U2/U3/U4/U8/U9 now connect to J1, the
+backplane connector, i.e. **6** backplane chips, up from 4; U5/U6 still the
+2 future-expansion chips, unchanged) — reasoning: more chips make routing
+easier and let trace lengths come out equal/matched, rather than cramming
+everything through fewer chips and ending up with spaghetti wiring. At the
+same time, the spare-channel policy below (mixed
+10k pull-up to +5V / hard GND tie, depending on chip) is **superseded**:
+*every* spare/unused channel across all 8 chips is now hard-tied directly
+to GND, no pull-up resistors anywhere on this sheet. Reasoning: the
+SN74LVC8T245 datasheet recommends tying off unused inputs rather than
+leaving them floating, and since `DIR` is statically strapped (not
+FPGA-controlled) on every one of these chips, there's no bus-contention
+risk from a direct tie to GND. Confirmed via `kicad-cli sch erc`: this
+shows up as 23 `pin_to_pin` warnings ("Bidirectional and Power output are
+connected", one per hard-tied spare pin, across U2/U4/U5/U8/U9) — expected
+and benign, exactly what a hard GND tie looks like from ERC's perspective.
+The detailed per-chip pin tables just below predate both this change and
+the cross-sheet reference-designator reannotation (§ earlier), so they no
+longer map accurately onto which physical chip has which spares — treat
+the schematic itself as authoritative for current wiring, not these tables.
 
 ### Backplane-facing 4 chips (29 of 32 channels used)
 
@@ -450,7 +475,7 @@ impossible in FPGA fabric, pin-boundary tri-states are normal.
 
 | Function | Candidate part | Package | Qty | Notes |
 |---|---|---|---|---|
-| Level shifter | Texas Instruments SN74LVC8T245PWR | TSSOP-24 | **6** | 4 for backplane bus, 2 for future-expansion header; ~$0.35 ea; 100nF ceramic decoupling on both VCCA and VCCB per chip |
+| Level shifter | Texas Instruments SN74LVC8T245PWR | TSSOP-24 | **8** | 6 for backplane bus (increased from 4, see §2, 2026-10-16: eases routing/equal trace lengths), 2 for future-expansion header; ~$0.35 ea; 100nF ceramic decoupling on both VCCA and VCCB per chip; all spare channels hard-tied to GND, no pull-ups |
 | UART/USB/WiFi bridge | Raspberry Pi Pico-W module | module-on-headers | 1 | hand-placed, not a JLCPCB SMT part; own on-board micro-USB used directly; needs antenna copper keepout + low-ESR bulk cap on VSYS |
 | Pico-W socket headers | 2x 1x20, 2.54mm pitch, THT, **tall/stacking-height** (not low-profile) | THT | 2 | soldered to this board; Pico-W plugs in — needed for USB-cable clearance, see §4 |
 | RS232 transceiver | **MAX3232EIDR**, SOIC-16 | SOIC-16 | 1 | chosen over MAX3232IPW (TSSOP-16) for easier hand-handling; 4x 0.1uF ceramic |
@@ -463,9 +488,9 @@ impossible in FPGA fabric, pin-boundary tri-states are normal.
 | DE0-Nano interface headers | 2x20 (0.1") IDC box header, 40-pin | THT | 2 | JP1 (GPIO_0, to level shifters) + JP2 (GPIO_1, to Pico-W/local) |
 | DE0-Nano power feed | 2-pin header | THT | 1 | backplane +5V/GND to DE0-Nano, + low-ESR bulk cap |
 | Future-expansion header | 2x11 (or 2x12) pin header | THT | 1 | 11 level-shifted CDP1802 control signals + 11 GND |
-| Pull-up resistors, 10k | — | 0603 | 29 | backplane: D0-D7, LC, nEF1-3, nINT (12); future-expansion header inputs EXP_* (7); spare level-shifter channels U4/U6 (4); front panel switches/buttons (6) |
+| Pull-up resistors, 10k | — | 0603 | 25 | backplane: D0-D7, LC, nEF1-3, nINT (12); future-expansion header inputs EXP_* (7); front panel switches/buttons (6) — **no longer** includes spare level-shifter channels (2026-10-16: those are now hard GND ties, no resistor, see §2) |
 | Series resistors, 10Ω | — | 0603 | 4 | `TPA`/`TPB`/`nMRD`/`nMWR`, at the FPGA end (`fpga_header.kicad_sch`), per `backplane_notes.md`'s signal-integrity note |
-| Level-shifter decoupling, 100nF | — | 0603 | 12 | 2 per SN74LVC8T245 (VCCA/3V3 + VCCB/5V) x6 chips — **PCB layout: place each cap close to its IC's respective supply pin**, not just electrically on the right net |
+| Level-shifter decoupling, 100nF | — | 0603 | 16 | 2 per SN74LVC8T245 (VCCA/3V3 + VCCB/5V) x **8** chips (was 6, see §2) — **PCB layout: place each cap close to its IC's respective supply pin**, not just electrically on the right net |
 | Misc caps | 0.1uF (MAX3232 charge pump), 100pF (nINT filter), low-ESR bulk x2 (DE0-Nano feed, Pico-W VSYS) | 0603/0805 | — | |
 | Schottky diode | 1N5817 (or equivalent) | SMA/DO-214AC or THT | 1 | anode on board +5V, cathode on Pico-W VSYS (pin 39) — back-feed protection |
 
@@ -502,14 +527,20 @@ open decisions:
    headers, see §4. Still need: a footprint/drawing for the DE0-Nano's 4x M3
    mounting holes (coordinates already known, §7).
 3. ~~Redraw the PCB outline, place all components~~ **DONE, roughly
-   (2026-10-09)** — see §7a. Real floorplan, DE0-Nano reference + mounting
-   holes, all 86 footprints placed with correct nets (0 electrical shorts).
-   **Still needed**: the user's real placement pass (mechanical fit,
-   ribbon-cable-friendly header positions, the 12 decoupling caps actually
-   close to each IC's VCCA/VCCB pins per §2, front-panel alignment) and all
-   routing — this was explicitly left for the user, not attempted here.
-4. `kicad-cli10 sch export bom` / JLCPCB BOM+CPL export once parts are
-   placed; check every part against current JLCPCB/LCSC stock before
-   ordering (MAX3232EIDR, the DIN41617 connector as a THT manual-assembly
-   item, SN74LVC8T245PWR x6, Pico-W module sourced/placed separately since
-   it's not a JLCPCB SMT part).
+   (2026-10-09)** — see §7a (rough/scripted placement), then
+   **~~final placement, routing, ground planes + via-stitching~~ DONE
+   (2026-10-16, user, in the KiCad GUI)**. `pcb drc` clean (0 violations,
+   0 unconnected) on the finished board. The user also made schematic
+   changes during this pass (8x level shifters, GND-tie spare-channel
+   policy, §2) and cleared the resulting `sch erc` errors (3
+   `power_pin_not_driven`, caused by accidentally-deleted `PWR_FLAG`
+   symbols — restored). `sch erc`: 0 errors, only pre-existing/benign
+   warnings remain.
+4. **Next: Gerber/drill export and JLCPCB handover** (in progress,
+   2026-10-16) — the user is doing this step themselves; `kicad-cli10 sch
+   export bom` / JLCPCB BOM+CPL export only needed if ordering PCBA
+   (assembly) rather than bare PCB fab. Check every part against current
+   JLCPCB/LCSC stock before ordering (MAX3232EIDR, the DIN41617 connector
+   as a THT manual-assembly item, SN74LVC8T245PWR x8 — was x6, see §2 —
+   Pico-W module sourced/placed separately since it's not a JLCPCB SMT
+   part).

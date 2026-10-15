@@ -8338,7 +8338,7 @@
 		(dnp no)
 		(uuid "0d66ddbb-a113-4a14-9718-b34738cf59d4")
 		(property "Reference" "U2"
-			(at 194.31 104.49 0)
+			(at 200.406 139.7 0)
 			(show_name no)
 			(do_not_autoplace no)
 			(effects
@@ -16655,7 +16655,7 @@
 		(dnp no)
 		(uuid "b9f19d76-a190-47ae-b730-1b272f9cb24e")
 		(property "Reference" "U3"
-			(at 284.48 104.49 0)
+			(at 294.132 136.398 0)
 			(show_name no)
 			(do_not_autoplace no)
 			(effects
@@ -19242,7 +19242,7 @@
 		(dnp no)
 		(uuid "edf836ec-82d7-435e-aa75-01ebf2be6c2f")
 		(property "Reference" "U8"
-			(at 199.39 208.63 0)
+			(at 210.058 241.808 0)
 			(show_name no)
 			(do_not_autoplace no)
 			(effects

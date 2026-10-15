@@ -722,7 +722,7 @@
         "uuid": "0daab69e-2257-45dd-abd7-efbe947cce3e"
       }
     ],
-    "used_designators": "U8-9,#PWR1-186,C20-24",
+    "used_designators": "#FLG1-4,U8-9,#PWR1-186,C20-24",
     "variants": []
   },
   "sheets": [
