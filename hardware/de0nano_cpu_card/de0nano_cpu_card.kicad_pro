@@ -60,7 +60,7 @@
           "hatch_smoothing_level": 0,
           "hatch_smoothing_value": 0.1,
           "hatch_thickness": 1.0,
-          "min_clearance": 0.5,
+          "min_clearance": 0.0,
           "min_island_area": 10.0,
           "min_thickness": 0.25,
           "pad_connection": 1,
@@ -76,7 +76,16 @@
           "width": 0.0
         }
       ],
-      "drc_exclusions": [],
+      "drc_exclusions": [
+        [
+          "silk_edge_clearance|295320000|189730000|39cb97af-169e-44b2-b2e8-dfcffbc5d3ea|d23e7dd1-d739-47f5-9f59-a4713db9fe7e",
+          ""
+        ],
+        [
+          "starved_thermal|181331320|119091320|e2897e09-6b33-4cc0-bf81-99ce71e80c6f|9260292e-ec95-493e-908a-fca1568b68d5|F.Cu",
+          ""
+        ]
+      ],
       "meta": {
         "version": 2
       },
