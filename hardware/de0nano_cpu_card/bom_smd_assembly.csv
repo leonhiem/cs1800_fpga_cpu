@@ -1,0 +1,12 @@
+Designator,Comment,Footprint,Qty,DNP
+C1,100pF,Capacitor_SMD:C_0603_1608Metric,1,
+"C2-C13,C21-C24",100nF,Capacitor_SMD:C_0603_1608Metric,16,
+C14,100uF_LowESR,Capacitor_SMD:C_1210_3225Metric,1,
+C15,10uF_LowESR,Capacitor_SMD:C_1210_3225Metric,1,
+C16-C20,0.1uF,Capacitor_SMD:C_0603_1608Metric,5,
+D1,1N5817,Diode_SMD:D_SMA,1,
+"R1-R24,R_SW1-R_SW6",10k,Resistor_SMD:R_0603_1608Metric,30,
+R28-R31,10,Resistor_SMD:R_0603_1608Metric,4,
+R_D1-R_D4,220,Resistor_SMD:R_0603_1608Metric,4,
+"U1-U6,U8,U9",SN74LVC8T245,Package_SO:TSSOP-24_4.4x7.8mm_P0.65mm,8,
+U7,MAX3232EIDR,Package_SO:SOIC-16_3.9x9.9mm_P1.27mm,1,
