@@ -1,12 +1,12 @@
 %TF.GenerationSoftware,KiCad,Pcbnew,10.0.6*%
-%TF.CreationDate,2026-10-16T11:33:46+02:00*%
+%TF.CreationDate,2026-10-16T12:14:47+02:00*%
 %TF.ProjectId,de0nano_cpu_card,6465306e-616e-46f5-9f63-70755f636172,rev?*%
 %TF.SameCoordinates,Original*%
 %TF.FileFunction,Soldermask,Top*%
 %TF.FilePolarity,Negative*%
 %FSLAX46Y46*%
 G04 Gerber Fmt 4.6, Leading zero omitted, Abs format (unit mm)*
-G04 Created by KiCad (PCBNEW 10.0.6) date 2026-10-16 11:33:46*
+G04 Created by KiCad (PCBNEW 10.0.6) date 2026-10-16 12:14:47*
 %MOMM*%
 %LPD*%
 G01*
@@ -844,7 +844,7 @@ D10*
 X221180000Y-126635000D03*
 X221180000Y-128285000D03*
 %TD*%
-%TO.C,R27*%
+%TO.C,R24*%
 X227330000Y-126665000D03*
 X227330000Y-128315000D03*
 %TD*%
