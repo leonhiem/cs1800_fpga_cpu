@@ -494,6 +494,73 @@ impossible in FPGA fabric, pin-boundary tri-states are normal.
 | Misc caps | 0.1uF (MAX3232 charge pump), 100pF (nINT filter), low-ESR bulk x2 (DE0-Nano feed, Pico-W VSYS) | 0603/0805 | — | |
 | Schottky diode | 1N5817 (or equivalent) | SMA/DO-214AC or THT | 1 | anode on board +5V, cathode on Pico-W VSYS (pin 39) — back-feed protection |
 
+## 11. JLCPCB PCBA submission — lessons learned (2026-10-16, order placed)
+
+Production files: `gerbers/` + `de0nano_cpu_card_gerbers.zip` (fab),
+`bom_smd_assembly.csv` + `cpl_smd.csv` (72-part SMT assembly subset —
+level shifters, MAX3232, 0603/1210 passives, the SMA diode; everything
+else is THT, hand-soldered separately, see §10). Order was successfully
+submitted after working through the issues below — **read this section
+before ever re-submitting or re-spinning this board**, all of it will
+bite again otherwise:
+
+> **⚠️ STRONG NOTE — IC rotation: KiCad's CPL rotation for SOIC/TSSOP
+> footprints does NOT match JLCPCB's placement convention.** Every IC
+> package in this design (`Package_SO:TSSOP-24...` ×8 for the level
+> shifters, `Package_SO:SOIC-16...` ×1 for the MAX3232) came out rotated
+> **90° wrong** in JLCPCB's web assembly preview, even though
+> `cpl_smd.csv` is correct relative to KiCad's own board/silkscreen. This
+> is a known, documented mismatch between KiCad's footprint-library pin-1
+> orientation convention and JLCPCB's internal component-library
+> orientation for the `Package_SO` family specifically — **not a bug in
+> this project's footprints or CPL generation**, and *not* something
+> `kicad-cli pcb export pos` or any flag on it can fix (it correctly
+> reflects KiCad's own convention; the mismatch is entirely on JLCPCB's
+> side of the translation). 0603/1210 passives and the SMA diode did
+> **not** need correction — this is specifically an IC/SOIC-footprint
+> issue. **Every future order must have IC rotation manually checked
+> and corrected (+90°) in JLCPCB's web placement preview before
+> confirming** — there is no way to know this was needed from the
+> uploaded files alone, you have to look at their 3D preview.
+> If this bites again, fix it visually in their preview exactly like
+> this time, rather than guessing a universal offset to bake into
+> `cpl_smd.csv` — JLCPCB's correction table is footprint-family-specific
+> and not something to encode blind.
+
+Other things fixed along the way, worth not re-discovering:
+- **CPL column headers matter.** `kicad-cli pcb export pos`'s default
+  headers (`Ref,Val,Package,PosX,PosY,Rot,Side`) are silently rejected by
+  JLCPCB's uploader with no error message. Must be renamed to their exact
+  template: `Designator,Mid X,Mid Y,Layer,Rotation` (and `Layer` values
+  capitalized: `Top`/`Bottom`).
+- **BOM designator ranges must be fully expanded**, not dash-compressed.
+  `kicad-cli sch export bom`'s default output (e.g.
+  `"R1-R24,R_SW1-R_SW6"`) isn't parseable by JLCPCB's BOM tool — use
+  `--ref-range-delimiter ""` to get plain comma-separated lists.
+- **A single BOM line mixing designator naming styles is also rejected**
+  ("There are multiple types of parts, but one type of part has been
+  matched") even when every part on that line is electrically/physically
+  identical (verified directly against the PCB file before concluding
+  this) — e.g. `"R1,...,R24,R_SW1,...,R_SW6"` had to be split into two
+  lines (plain `R#` vs `R_SW#`) purely because of the naming-style mix.
+  Likely cause: JLCPCB's parser pattern-matches designator prefixes as a
+  sanity check and treats a style mismatch as a part-type mismatch.
+  If a future BOM edit reintroduces a line mixing e.g. `R#`/`R_D#`/`R_SW#`
+  prefixes, split it the same way pre-emptively.
+- **BOM and CPL designator sets must match exactly** (checked
+  programmatically every time a file changed, see commit history) — a
+  stray schematic/PCB reference mismatch (`R27` on the PCB vs `R24` in
+  the schematic, from a schematic rename that never got pushed to the
+  board via "Update PCB from Schematic") was the root cause of one such
+  mismatch; always diff `(reference ...)` strings between the schematic
+  files and the `.kicad_pcb` after any manual rename, not just `sch erc`
+  (which doesn't catch this).
+- JLCPCB sourcing: resolved "part match/shortfall" errors by manually
+  picking exact LCSC Part#/MFR.Part# via https://jlcpcb.com/parts and
+  adding them as real CSV columns (not crammed into the Designator field
+  — a first hand-edit attempt did this by accident, easy mistake when
+  editing CSV in a plain text editor rather than a spreadsheet tool).
+
 ## Open questions
 
 **All architecture and mechanical/sourcing questions are now resolved.**
